@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  </head>
+  <body>
+    <h1>Task 1</h1>
+    <p>
+      Знайти суму, добуток та частку двох дійсних чисел. Результат вивести у
+      формі таблиці
+    </p>
+    <script>
+      // Enter the first and the second diggit
+      let firstDigit = parseInt(prompt("Enter the first digit", "0"));
+      let secondDigit = parseInt(prompt("Enter the second digit", "0"));
+      // Calculate the sum, product and quotient
+      let sum = firstDigit + secondDigit;
+      let product = firstDigit * secondDigit;
+      let quotient = firstDigit / secondDigit;
+      // Display the results in the table
+      document.write(`
+    <table border="1">
+        <tr>
+            <th>Expression</th>
+            <th>Result</th>
+        </tr>
+        <tr>
+            <td>${firstDigit} + ${secondDigit}</td>
+            <td>${sum}</td>
+        </tr>  
+        <tr>
+            <td>${firstDigit} * ${secondDigit}</td>
+            <td>${product}</td>
+        </tr>    
+        <tr>
+            <td>${firstDigit} / ${secondDigit}</td>
+            <td>${quotient}</td>
+        </tr> 
+        <p><a href="../index.html">Go Back</a></p>  
+    </table>`);
+    </script>
+  </body>
+</html>

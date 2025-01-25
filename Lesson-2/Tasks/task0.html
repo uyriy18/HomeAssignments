@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  </head>
+  <body>
+    <h1>Task 0</h1>
+    <p>Задача 0. Обчислити значення виразів</p>
+    <p>S1=a+12+b</p>
+    <p>S2=sqrt(a+b/2*a)</p>
+    <p></p>
+    <p>S3=cbrt((a+b)*c)</p>
+    <p>S4=sin(a/-b)</p>
+    <script>
+      // Enter a, b and c
+      let a = parseInt(prompt("Enter a", "0"));
+      let b = parseInt(prompt("Enter b", "0"));
+      let c = parseInt(prompt("Enter c", "0"));
+      // Calculate S1, S2, S3, S4
+      let S1 = a + 12 + b;
+      let S2 = Math.sqrt(a + (b / 2) * a);
+      let S3 = Math.cbrt((a + b) * c);
+      let S4 = Math.sin(a / -b);
+      // Display the results in a table
+      document.write(`
+            <table border="1">
+                <tr>
+                    <th>Expression</th>
+                    <th>Result</th>
+            </tr>
+            <tr>
+                <td>S1=${a}+12+${b}</td>
+                <td>${S1}</td>
+            </tr>
+            <tr>
+                <td>S2=sqrt(${a}+${b}/2*${a})</td>
+                <td>${S2}</td>
+            </tr>
+            <tr>
+                <td>S3=cbrt((${a}+${b})*${c})</td>
+                <td>${S3}</td>
+            </tr>
+            <tr>
+                <td>S4=sin(${a}/-${b})</td>
+                <td>${S4}</td>
+            </tr>
+        </table>
+        <p><a href="../index.html">Go Back</a></p>  
+        `);
+    </script>
+  </body>
+</html>

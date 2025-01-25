@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  </head>
+  <body>
+    <h1>Task 5</h1>
+    <p>
+      Дано кількість секунд, що пройшла від початку доби. Визначити скільки це
+      годин і хвилин.
+    </p>
+    <script>
+      // Declearing const NOW to define how many hours, minutes, seconds have past from beginning of the day
+      const NOW = new Date();
+      // Calculation with Date object; 1 hour = 3600 seconds, 1 minute = 60 seconds, further we put this value as a placeholder in prompt
+      const EXACTSECONDS =
+        NOW.getHours() * 3600 + NOW.getMinutes() * 60 + NOW.getSeconds();
+      // Calculation from prompt entering
+      const SECONDS2 = parseInt(
+        prompt(
+          "Enter the number of seconds have passed since the beginning of the day",
+          EXACTSECONDS
+        )
+      );
+      // Calculating hours
+      const HOURS = Math.floor(SECONDS2 / 3600);
+      const MINUTES = Math.floor((SECONDS2 - HOURS * 3600) / 60);
+      const SECOONDSLEFT = Math.floor(SECONDS2 - HOURS * 3600 - MINUTES * 60);
+
+      document.write(`
+            ${SECONDS2} seconds have passed since the beginning of the day, this is ${HOURS} 
+         hours, ${MINUTES} minutes, ${SECOONDSLEFT} seconds</p>
+        </p>
+        <p><a href="../index.html">Go Back</a></p>  
+      `);
+    </script>
+  </body>
+</html>

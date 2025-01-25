@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  </head>
+  <body>
+    <h1>Task 6</h1>
+    <p>
+      З клавіатури вводяться вартість товару та кількість одиниць 3 товарів.
+      Обчислити вартість кожного товару окремо та загальну вартість. Вивести чек
+      (як у супермаркеті) використовуючи елементи розмітки.
+    </p>
+    <script>
+      // Enter the peice and qty
+      const PRICE1 = parseInt(
+        prompt("Eneter the first good's price of the good", "10")
+      );
+      const QTY1 = parseInt(prompt("Enter the first good's quantity", "1"));
+      const PRICE2 = parseInt(
+        prompt("Eneter the second good's price of the good", "10")
+      );
+      const QTY2 = parseInt(prompt("Enter the second good's quantity", "1"));
+      const PRICE3 = parseInt(
+        prompt("Eneter the third good's price of the good", "10")
+      );
+      const QTY3 = parseInt(prompt("Enter the third good's quantity", "1"));
+      // calculate taxes
+      const TOTALITEMSPRICE = PRICE1 * QTY1 + PRICE2 * QTY2 + PRICE3 * QTY3;
+      const VAT = parseInt((TOTALITEMSPRICE * 0.05).toFixed(2));
+      document.write(`<table border="1">
+        <tr>
+            <th>Item Name</th>
+            <th>Price for each</th>
+            <th>Quantity</th>
+            <th>Total Items price</th>
+        </tr>
+        <tr>
+            <td>Product 1</td>
+            <td>${PRICE1}</td>
+            <td>${QTY1}</td>
+            <td>${PRICE1 * QTY1}</td>
+        </tr>  
+        <tr>
+            <td>Product 2</td>
+            <td>${PRICE2}</td>
+            <td>${QTY2}</td>
+            <td>${PRICE2 * QTY2}</td>
+        </tr>    
+        <tr>
+            <td>Product 3</td>
+            <td>${PRICE3}</td>
+            <td>${QTY3}</td>
+            <td>${PRICE3 * QTY3}</td>
+        </tr>  
+    </table>
+      <p>Total Items price ${TOTALITEMSPRICE}</p>
+      <p>Include VAT ${VAT}</p>
+      <p>Total Order ${TOTALITEMSPRICE+VAT}</p>
+      <p><a href="../index.html">Go Back</a></p>  
+      `);
+    </script>
+  </body>
+</html>

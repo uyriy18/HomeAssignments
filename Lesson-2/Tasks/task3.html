@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  </head>
+  <body>
+    <h1>Task 3</h1>
+    <p>
+      Дано вартість одиниці товару і кількість. Знайти загальну вартість та ПДВ
+      (5% від загальної вартості).
+    </p>
+    <script>
+      // Enter the peice and qty
+      const PRICE = parseInt(prompt("Eneter the price of the good", "10"));
+      const QTY = parseInt(prompt("Enter the goods quantity", "1"));
+      // calculate taxes
+      const VAT = PRICE * QTY * 0.05;
+
+      document.write(`
+      <p>VAT tax for the ${QTY} goods with ${PRICE} hrn price for each is ${VAT} hrn</p>     
+      <p><a href="../index.html">Go Back</a></p>  
+      `);
+    </script>
+  </body>
+</html>

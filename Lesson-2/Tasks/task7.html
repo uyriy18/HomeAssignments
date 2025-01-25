@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  </head>
+  <body>
+    <h1>Task 7</h1>
+    <p>
+      Знайти суму випадкового номера місяця (від 1 до 12) та випадкового номера
+      дня (від 0 до 6).
+    </p>
+    <script>
+        const RANDOMDAY= Math.floor((Math.random()*6) + 1)
+        const RANDOMMONTH = Math.floor((Math.random()*12) + 1)
+        const SUM = RANDOMDAY + RANDOMMONTH
+      document.write(`
+      <p>Random day from 1 to 6 - <b>${RANDOMDAY}</b>, random month from 1 to 12 - <b>${RANDOMMONTH}</b>, their sum= <b>${SUM}</b></p> 
+      <p><a href="../index.html">Go Back</a></p>   
+      `);
+    </script>
+  </body>
+</html>
