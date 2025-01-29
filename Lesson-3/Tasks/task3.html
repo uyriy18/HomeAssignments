@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  </head>
+  <body>
+    <h1>Task 3</h1>
+    <p>
+      Випадковим чином генерується число від 1 до 5. Спробуйте вгадати число за 2 спроби.
+    </p>
+    <script>
+      const RandomNumber = Math.floor((Math.random()*5) + 1)
+      let userNumber1
+      let userNumber2
+      let i = 1
+
+      userNumber1 = parseInt(prompt(`${i++} atempt Guess the number`,"1"))
+      userNumber2 = parseInt(prompt(`${i++} atempt Guess the number`,"2"))
+      if(userNumber1 === RandomNumber || userNumber2 === RandomNumber){
+        document.write(`SUCCESS</br>
+        your numbers were ${userNumber1} and ${userNumber2}, secret number was ${RandomNumber} </br>
+        YOU WON!`)}
+      else{document.write(`FAIL</br>
+        your numbers were ${userNumber1} and ${userNumber2}, secret number was ${RandomNumber} </br>
+         YOU ARE LOOSER!`)}
+      
+    </script>
+  </body>
+</html>

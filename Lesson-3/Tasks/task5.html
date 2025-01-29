@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  </head>
+  <body>
+    <h1>Task 5</h1>
+    <p>
+      З клавіатури вводиться назва категорії водія 
+      (А-мотоцикл, В-легковий автомобіль, С-вантажний автомобіль). 
+      Вивести на екран назву транспортного засобу, яким він може керувати.
+    </p>
+    <script>
+      const A = "Motobike"
+      const B = "Car"
+      const C = "Truck"
+      const Category = prompt("Enter the type of a driver license A, B or C", "A").toLocaleUpperCase()
+      switch(Category){
+        case("A"):
+        document.write(`You can drive a motobike`)
+        break;
+        case("B"):
+        document.write(`You can drive a car`)
+        break;
+        case("C"):
+        document.write(`You can drive a truck`)
+        break;
+        default:
+        document.write(`Wrong License type`)
+      }
+    </script>
+  </body>
+</html>

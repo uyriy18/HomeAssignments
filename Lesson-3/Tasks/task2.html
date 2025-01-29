@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  </head>
+  <body>
+    <h1>Task 2</h1>
+    <p>
+      З клавіатури вводиться ціна товару і кількість грошей. 
+      Якщо грошей не вистачає то відмовляємо у покупці, інакше, 
+      якщо ще залишаються гроші, то пропонуємо купити лотерею за 4 грн.
+    </p>
+    <script>
+      const ItemQty = parseInt(prompt("How many items do you have?", "3"))
+      const ItemPrice = parseInt(prompt("How mach does it cost?", "30"))
+      const MoneySum = parseInt(prompt("How mach many do you have?", "200"))
+      if(ItemQty*ItemPrice > MoneySum){
+        document.write(`Payment is declined. Not enough money`)
+      } else if(ItemQty*ItemPrice === MoneySum){
+        document.write(`Payment is accepted.`)
+      } else{
+        document.write(`Payment is accepted. Would you like to buy a lottery ticket for 4 uah`)
+      }
+    </script>
+  </body>
+</html>

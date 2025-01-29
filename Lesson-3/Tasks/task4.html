@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  </head>
+  <body>
+    <h1>Task 4</h1>
+    <p>
+      З клавіатури вводиться вік людини. Вивести на екран ким він є (дитиною у садочку, школярем, студентом, працівником, пенсіонером).
+    </p>
+    <script>
+      const ADGE = parseInt(prompt("Enter your adge", "20"))
+      switch(true){
+        case (ADGE > 0 && ADGE <= 7):
+          document.write("You are a kid in the kindergarden");
+          break;
+        case (ADGE > 7 && ADGE <= 18):
+          document.write("Pupil");
+          break;
+        case (ADGE > 18 && ADGE <= 22):
+          document.write("Student");
+          break;
+        case (ADGE > 22 && ADGE <= 60):
+          document.write("Worker");
+          break;
+        case (ADGE > 60 && ADGE < 150):
+          document.write("Retired");
+          break;
+        case (ADGE > 150):
+          document.write("You are dead")
+          break;
+        default:
+          document.write("The adge is underfined");
+      }
+    </script>
+  </body>
+</html>

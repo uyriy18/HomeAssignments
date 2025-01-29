@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  </head>
+  <body>
+    <h1>Task 7</h1>
+    <p>
+      З клавіатури вводиться номер місяця. Вивести до якої пори він відноситься
+    </p>
+    <script>
+      const MonthNumber = parseInt(
+        prompt("Enter the number of a Month from 1 to 12", "11")
+      );
+      if ((MonthNumber > 0 && MonthNumber < 3) || MonthNumber === 12) {
+        document.write("Winter");
+      } else if (MonthNumber >= 3 && MonthNumber < 6) {
+        document.write("Spring");
+      } else if (MonthNumber >= 6 && MonthNumber < 9) {
+        document.write("Summer");
+      } else if (MonthNumber >= 9 && MonthNumber <= 11) {
+        document.write("Autumn");
+      } else {
+        document.write("Wrong month number");
+      }
+    </script>
+  </body>
+</html>
