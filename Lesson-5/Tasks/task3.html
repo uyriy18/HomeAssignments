@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  </head>
+  <body>
+    <h1>Task 3</h1>
+    <p>
+      Вивести таблицю з одним рядком і  7 стовпцями.
+    </p>
+    <script>
+      let conf = confirm("Do you want to start testing?")
+      if(conf){
+        let table = document.createElement("table")
+        let tbody = document.createElement("tbody")
+        table.style.border = "1px solid black"
+        for (let i = 0; i < 1; i++){
+          let row = document.createElement("tr")
+          for(let j = 0; j < 7; j++){
+            let cell = document.createElement("td")
+            cell.textContent = j+1
+            cell.style.border = "1px solid black"
+            cell.style.padding = "5px"
+            row.appendChild(cell)
+          }
+          tbody.appendChild(row)
+        }
+        table.appendChild(tbody)
+        document.body.appendChild(table)
+      }
+    </script>
+  </body>
+</html>
+

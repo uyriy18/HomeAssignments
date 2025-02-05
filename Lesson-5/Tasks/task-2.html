@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  </head>
+  <body>
+    <h1>Task -2</h1>
+    <p>
+      Поступово генерувати 100 випадкових чисел від 1 до 1000. Підрахувати яких
+      чисел більше: парних чи непарних.
+    </p>
+    <script>
+      let conf = confirm("Do you want to start testing?")
+      if(conf){
+        let even= 0
+        let odd= 0
+        for(let i=0; i<100; i++){
+          let digit = Math.round(1+Math.random()*1000)
+          document.write(`${digit}<br/>`)
+          digit % 2 ? even++ : odd++
+        }
+        even>odd ? document.write(`even digits (${even}) are more then odd (${odd})`) 
+        :  document.write(`odd digits (${odd}) are more then even (${even})`)
+      }
+    </script>
+  </body>
+</html>

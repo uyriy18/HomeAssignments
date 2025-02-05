@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  </head>
+  <body>
+    <h1>Task 1</h1>
+    <p>
+      Вивести з використанням циклів маркований список з випадковими числами (1-100). Кількість випадкових чисел вводиться користувачем. 
+    </p>
+    <script>
+      let conf = confirm("Do you want to start testing?") 
+      if(conf){
+        let digitNumber = parseInt(prompt("Enter the number of digits", "10")) || 10
+        let ol = document.createElement("ol")
+        for(let i=0; i<digitNumber; i++){
+          let digit = Math.round(1+Math.random()*100)
+          let ul = document.createElement("ul")
+          ul.textContent = digit
+          ol.appendChild(ul)
+        }
+        document.body.appendChild(ol)
+      }
+    </script>
+  </body>
+</html>

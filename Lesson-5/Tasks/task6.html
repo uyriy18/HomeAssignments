@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <style>
+    .hstack{
+      display: flex;
+      gap: 20px
+    }
+  </style>
+  <head>
+    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  </head>
+  <body>
+    <h1>Task 6</h1>
+    <p>Вивести 3(три) таблиці 3X3 з числами (1: 1-9, 2:10-18, 3:19-27)</p>
+    <script>
+      let conf = confirm("Do you want to start testing?");
+      if (conf) {
+        function createTable(start, rows, cols) {
+          let table = document.createElement("table");
+          let tbody = document.createElement("tbody");
+          table.style.border = "1px solid black";
+          for (let i = 0; i < rows; i++) {
+            let row = document.createElement("tr");
+            for (let j = 0; j < cols; j++) {
+              let cell = document.createElement("td");
+              cell.textContent = start++;
+              cell.style.border = "1px solid black";
+              cell.style.padding = "5px";
+              row.appendChild(cell);
+            }
+            tbody.appendChild(row);
+          }
+          table.appendChild(tbody);
+          return table;
+        }
+        let hStackContainer = document.createElement("div");
+        hStackContainer.classList.add("hstack")
+        hStackContainer.appendChild(createTable(1, 3, 3));
+        hStackContainer.appendChild(createTable(10, 3, 3));
+        hStackContainer.appendChild(createTable(19, 3, 3));
+        document.body.appendChild(hStackContainer)
+      }
+    </script>
+  </body>
+</html>
