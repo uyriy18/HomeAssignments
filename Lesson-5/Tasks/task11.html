@@ -9,12 +9,93 @@
   <body>
     <h1>Task 11</h1>
     <p>
-      Знайти суму 5 непарних чисел, що знаходяться між заданими користувачем числами.
+      Ігровий автомат. Випадково вибираємо зображення у 3 позиціях. Вибір у
+      кожній позиції вибирається як одне з чотирьох зображень. Вивести ці
+      зображення і повідомити виграш користувача (три перших зображення 100 грн,
+      три других – 200, три третіх – 500, три четвертих зображення – 1000грн).
+      Використати цикли і switch (для вибору зображення за номером).
     </p>
     <script>
-      let conf = confirm("Do you want to start testing?")
-      if(conf){
-        
+      let conf = confirm("Do you want to start testing?");
+      if (conf) {
+        let div = document.createElement("div");
+        let div2 = document.createElement("div");
+        let p = document.createElement("p");
+        let result = 0;
+        const FRUITS = [
+          (cherrySrc = "../../Images/cherries.svg"),
+          (bananasSrc = "../../Images/bananas.svg"),
+          (watermelonSrc = "../../Images/watermelon.svg"),
+          (grapesSrc = "../../Images/grapes.svg"),
+        ];
+        for (let i = 0; i < 3; i++) {
+          let temp;
+          let rand = Math.round(Math.random() * 3);
+          console.log(`rand ${rand}`);
+          div.appendChild(createImage(FRUITS[rand]));
+
+          switch (rand) {
+            case 0:
+              temp = Math.pow(10, 1);
+              console.log(`banana ${temp}`);
+              break;
+
+            case 1:
+              temp = Math.pow(10, 2);
+              console.log(`cherry ${temp}`);
+              break;
+
+            case 2:
+              temp = Math.pow(10, 3);
+              console.log(`watermelon ${temp}`);
+              break;
+
+            case 3:
+              temp = Math.pow(10, 4);
+              console.log(`rand ${temp}`);
+              break;
+
+            default:
+              break;
+          }
+          console.log((result += temp));
+        }
+
+        switch (result) {
+          case 30:
+            p.textContent = "You won 100 UAH";
+            break;
+
+          case 300:
+            p.textContent = "You won 200 UAH";
+            break;
+
+          case 3000:
+            temp = Math.pow(10, 3);
+            p.textContent = "You won 500 UAH";
+            break;
+
+          case 30000:
+            p.textContent = "You won 1000 UAH";
+            break;
+
+          default:
+            p.textContent = "You lost... Try again";
+            break;
+        }
+        div2.appendChild(p);
+
+        document.body.appendChild(div);
+        document.body.appendChild(div2);
+
+        function createImage(src) {
+          let img = document.createElement("img");
+          img.src = src;
+          img.style.width = "50px";
+          img.style.border = "1px solid black";
+          img.style.margin = "5px";
+          return img;
+        }
       }
     </script>
   </body>

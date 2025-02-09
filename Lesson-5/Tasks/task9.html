@@ -9,12 +9,27 @@
   <body>
     <h1>Task 9</h1>
     <p>
-      Користувач загадує число. Комп’ютер задає питання поки не вгадає число користувача (використати confirm).
+      Знайти суму всіх непарних чисел, що знаходяться між заданими користувачем
+      числами.
     </p>
     <script>
-      let conf = confirm("Do you want to start testing?")
-      if(conf){
-        
+      let conf = confirm("Do you want to start testing?");
+      if (conf) {
+        let min = parseInt(prompt("enter the first limit")) || 10;
+        let max = parseInt(prompt("enter the second limit")) || 100;
+        if (min > max) {
+          let temp = min;
+          min = max;
+          max = temp;
+        }
+        let oddSume = 0;
+        let evenSume = 0;
+        for (let i = min; i <= max; i++) {
+          i % 2 == 0 ? (evenSume += i) : (oddSume += i);
+        }
+        alert(
+          `The sume of odd digits between ${min} and ${max} is ${oddSume}, the even digits sume is ${evenSume}`
+        );
       }
     </script>
   </body>

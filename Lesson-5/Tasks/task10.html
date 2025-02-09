@@ -9,12 +9,33 @@
   <body>
     <h1>Task 10</h1>
     <p>
-      Знайти суму всіх непарних чисел, що знаходяться між заданими користувачем числами. 
+      Знайти суму 5 непарних чисел, що знаходяться між заданими користувачем
+      числами.
     </p>
     <script>
-      let conf = confirm("Do you want to start testing?")
-      if(conf){
-        
+      let conf = confirm("Do you want to start testing?");
+      if (conf) {
+        let min = parseInt(prompt("enter the first limit")) || 10;
+        let max = parseInt(prompt("enter the second limit")) || 100;
+        let count = 0
+        if (min > max) {
+          let temp = min;
+          min = max;
+          max = temp;
+        }
+        let oddSume = 0;
+        let evenSume = 0;
+        for (let i = min; i <= max; i++) {
+          if(i % 2 !== 0 ){
+            evenSume += i
+            count++
+          }
+          if (count == 5) break;
+        }
+        if (count !== 5) alert (`There only ${count} digits in the limit`)
+        alert(
+          `The sume of first five even digits between ${min} and ${max} is ${evenSume}`
+        )
       }
     </script>
   </body>
