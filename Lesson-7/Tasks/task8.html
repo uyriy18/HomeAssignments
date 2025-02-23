@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  </head>
+  <body>
+    <h1>Task 8</h1>
+    <p>
+      Створити функцію, яка виводить банер (у функцію передаються: зображення,
+      заголовок та посилання, куди переходимо при кліку на зображення.<br />
+      Тег
+      <code>&lt;a&gt; &lt;img src=&quot;шлях&quot; /&gt; &lt;/a&gt;</code>
+      повинен бути виведений як текст).
+    </p>
+    <script>
+      let conf = confirm("Do you want to start testing?");
+      if (conf) {
+        function createBanner(imageSource, title, link) {
+          const bannerContainer = document.createElement("div");
+          const ancor = document.createElement("a");
+          ancor.href = link;
+
+
+
+          const image = document.createElement("img")
+          image.src = imageSource
+          image.alt = title
+          image.style.width = "100px";
+          image.style.border = "1px solid black";
+          image.style.margin = "20px";
+
+          ancor.appendChild(image)
+
+          bannerContainer.appendChild(ancor)
+          document.body.appendChild(bannerContainer)
+        }
+        createBanner("https://tse2.mm.bing.net/th?id=OIP.rttvJoNA5XDyt9Z-CAYR7wHaHa&pid=Api", "To Google", "https://google.com")
+      }
+    </script>
+  </body>
+</html>

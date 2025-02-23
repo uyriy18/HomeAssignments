@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <style>
+    .div {
+      gap: 5px;
+    }
+  </style>
+  <head>
+    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  </head>
+  <body>
+    <h1>Task 7</h1>
+    <p>
+      Створити функцію, яка випадковим чином виводить на екран одне із 4
+      зображень (шляхи до зображень передаються у функцію)
+    </p>
+    <script>
+      let conf = confirm("Do you want to start testing?");
+      if (conf) {
+        let div = document.createElement("div");
+        document.body.appendChild(div); 
+
+        const FRUITS = [
+          "../../Images/cherries.svg",
+          "../../Images/bananas.svg",
+          "../../Images/watermelon.svg",
+          "../../Images/grapes.svg",
+        ];
+
+        function createImage(arr) {
+          let img = document.createElement("img");
+          const randomIndex = Math.floor(Math.random() * arr.length);
+          console.log(`Random Image Source: ${arr[randomIndex]}`);
+          img.src = arr[randomIndex];
+          img.style.width = "100px";
+          img.style.border = "1px solid black";
+          img.style.margin = "20px";
+          return img;
+        }
+
+        div.appendChild(createImage(FRUITS));
+      }
+    </script>
+  </body>
+</html>

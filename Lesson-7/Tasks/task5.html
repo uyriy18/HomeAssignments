@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+  <style>
+    .vstack {
+      display: flex;
+      flex-direction: column;
+      gap: 12px; 
+      margin: 20px auto;
+      padding: 16px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+      width: 240px;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    input, select, button {
+      width: 100%;
+      padding: 8px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      box-sizing: border-box
+    }
+
+    button {
+      background-color: #007BFF;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+  <head>
+    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    
+  </head>
+  <body>
+    <h1>Task 5</h1>
+    <p>
+      Створити окремі функції, які переводять: </br>
+      Сантиметри у дюйми;</br>
+      Кілограми у фунти;</br>
+      Кілометри у милі.</br>
+    </p>
+    <div id ="app">
+    <script>
+      let conf = confirm("Do you want to start testing?")
+      if(conf){
+
+        function convertCentimetersToInches(number){
+          return number * 0.39
+        }
+        function convertKilogramsToInches(number){
+          return number * 2.20462
+        }
+        function convertMilesToKilometers(number){
+          return number * 0.621371
+        }
+        const label = document.createElement('label')
+        label.textContent = 'Select a unit'
+        label.setAttribute("for", "unitSelect")
+
+        const select = document.createElement('select')
+        select.id = "unitSelect"
+
+        const units = [
+          {value: "cm", text: "Centimeters"},
+          {value: "kg", text: "Kilograms"},
+          {value: "km", text: "kilometers"} 
+        ]
+
+        for(let i = 0; i< units.length; i++){
+          let option = document.createElement('option')
+          option.value = units[i].value
+          option.text = units[i].text
+          select.appendChild(option)
+        }
+
+
+        const button = document.createElement("button")
+        button.textContent = "Convert"
+
+        const resultParagraph = document.createElement("p")
+        const input = document.createElement("input")
+        input.id = "numberInput"
+        input.placeholder = "Enter a value"
+
+        const inputLabel = document.createElement('label')
+        inputLabel.textContent = 'Enter a number'
+        inputLabel.setAttribute("for", "numberInput")
+
+        const vstack = document.createElement("div")
+        vstack.className = "vstack"
+
+        const appDiv = document.getElementById("app")
+        vstack.appendChild(label)
+        vstack.appendChild(select)
+        vstack.appendChild(inputLabel)
+        vstack.appendChild(input)
+        vstack.appendChild(button)
+        vstack.appendChild(resultParagraph)
+        appDiv.appendChild(vstack)
+
+        button.addEventListener("click", () => {
+          const enteredNumber = parseFloat(input.value)
+          const selectedUnit = select.value
+          if(isNaN(enteredNumber)){
+          resultParagraph.textContent = "Please enter valid number"
+          resultParagraph.style.color = "red"
+        } else{
+          switch(selectedUnit){
+            case "cm":
+              resultParagraph.textContent = `${enteredNumber}cm = ${convertCentimetersToInches(enteredNumber)} inches`
+              break;
+            case "kg":
+              resultParagraph.textContent = `${enteredNumber}kg = ${convertKilogramsToInches(enteredNumber)} pounds`
+              break;
+            case "km":
+              resultParagraph.textContent = `${enteredNumber}km = ${convertMilesToKilometers(enteredNumber)} miles`
+              break;
+          }
+  
+        }
+
+        })       
+      }
+    </script>
+    </div> 
+  </body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  </head>
+  <body>
+    <h1>Task 11</h1>
+    <p>
+      Створити функцію, яка для 3 заданих чисел знаходить одночасно декілька
+      результатів: кількість парних, кількість додатних, кількість більших за
+      100.
+    </p>
+    <script>
+      let conf = confirm("Do you want to start testing?");
+      if (conf) {
+        let numbersArray = [];
+
+        function fillArray(arr) {
+          for (let i = 0; i < 3; i++) {
+            let number =
+              parseInt(prompt(`Enter the digit #${i + 1}`)) || 101;
+            arr.push(number);
+          }
+        }
+        let getEvenNumber = function (arr) {
+          let count = 0;
+          for (let i = 0; i < arr.length; i++) {
+            if (arr[i] % 2 == 0) count++;
+          }
+          return count;
+        };
+        let getPositiveNumber = function (arr) {
+          let count = 0;
+          for (let i = 0; i < arr.length; i++) {
+            if (arr[i] >= 0) count++;
+          }
+          return count;
+        };
+        let getMoreThanHundredNumber = function (arr) {
+          let count = 0;
+          for (let i = 0; i < arr.length; i++) {
+            if (arr[i] > 100) count++;
+          }
+          return count;
+        };
+        function getCalculationResults(arr) {
+          document.write(`<p>You entered ${arr[0]}, ${arr[1]}, ${arr[2]}</p>
+          <p>Even number(s) = ${getEvenNumber(arr)} </p>
+          <p>Positive number(s) =  ${getPositiveNumber(arr)}  </p>
+          <p>Number(s) > 100 is(are)  ${getMoreThanHundredNumber(arr)}</p>
+          `);
+        }
+        fillArray(numbersArray);
+        getCalculationResults(numbersArray);
+      }
+    </script>
+  </body>
+</html>

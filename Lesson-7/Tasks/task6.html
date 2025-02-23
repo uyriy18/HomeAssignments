@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <style>
+    .cell {
+      border: 1px solid black; 
+      padding: 5px;
+      text-align: center;
+    }
+
+    table {
+      border: 1px solid black;
+      border-collapse: collapse; 
+      width: 80%; 
+      margin: 20px auto; 
+    }
+
+    th, td {
+      border: 1px solid black; 
+      padding: 10px; 
+      text-align: center; 
+    }
+  </style>
+  <head>
+    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  </head>
+  <body>
+    <h1>Task 6</h1>
+    <p>
+      Створити функцію, яка створює таблицю з вказаною кількістю рядків і
+      стовпців (таблиця заповнюється заданим фіксованим повідомленням).
+    </p>
+    <script>
+      let conf = confirm("Do you want to start testing?");
+      if (conf) {
+        const RowsNumber = parseInt(prompt("Enter the rows number")) || 3;
+        const ColumsNumber = parseInt(prompt("Enter the colums number")) || 3;
+        const Message = prompt("Enter the message") || "Hello"
+
+        function createTable(rows, colums, message) {
+          let table = document.createElement("table");
+          let tbody = document.createElement("tbody");
+          for (let i = 0; i < rows; i++) {
+            let row = document.createElement("tr");
+            for (let j = 0; j < colums; j++) {
+              let cell = document.createElement("td");
+              cell.textContent = message
+              row.appendChild(cell);
+            }
+            tbody.appendChild(row);
+          }
+          table.appendChild(tbody);
+          document.body.appendChild(table);
+        }
+
+        createTable(RowsNumber,ColumsNumber,Message)
+      }
+    </script>
+  </body>
+</html>

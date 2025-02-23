@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  </head>
+  <body>
+    <h1>Task 2</h1>
+    <p>
+      Створити функцію, яка за номером дня дозволяє з’ясувати чи є цей день
+      робочим.
+    </p>
+    <script>
+      let conf = confirm("Do you want to start testing?");
+      if (conf) {
+        const DayNumber = parseInt(prompt("Enter the day number")) || 1;
+        function isWorkingDay(dayNumber) {
+          if (dayNumber >= 1 && dayNumber < 6) {
+            document.write(`<p>${dayNumber} day of week is a working day</p>`);
+          } else if (dayNumber >= 6 && dayNumber <= 7) {
+            document.write(`<p>${dayNumber} day of week is a weekend</p>`);
+          } else {
+            throw new Error(
+              "Invalid day number. Please enter a number between 1 and 7."
+            );
+          }
+        }
+        try {
+          isWorkingDay(DayNumber);
+        } catch (error) {
+          document.write(`<p style="color: red;">${error.message}`)
+        }
+      }
+    </script>
+  </body>
+</html>

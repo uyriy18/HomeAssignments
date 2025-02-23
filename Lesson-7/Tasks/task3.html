@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  </head>
+  <body>
+    <h1>Task 3</h1>
+    <p>
+      Створити окремі функції, які для 4 чисел знаходять: </br>
+      1 суму;</br>
+      2 добуток;</br>
+      3 середнє арифметичне;</br>
+      4 мінімальне значення</br>
+    </p>
+    <script>
+      let conf = confirm("Do you want to start testing?")
+      if(conf){
+        const FirstNumber = parseInt(prompt("Enter the first number")) || 1;
+        const SecondNumber = parseInt(prompt("Enter the second number")) || 1;
+        const ThirdNumbet = parseInt(prompt("Enter the third number")) || 1;
+        const ForthNumber = parseInt(prompt("Enter the forth number")) || 1;
+        function sum(num1, num2, num3, num4){
+          return num1+num2+num3+num4
+        }
+        function mean(num1, num2, num3, num4){
+          return (num1+num2+num3+num4)/4
+        }
+        function product(num1, num2, num3, num4){
+          return num1*num2*num3*num4
+        }
+        function min(num1, num2, num3, num4){
+          return Math.min(num1, num2, num3, num4)
+        }
+        document.write(`
+        <p> ${FirstNumber} + ${SecondNumber} + ${ThirdNumbet} + ${ForthNumber} = ${sum(FirstNumber,SecondNumber,ThirdNumbet,ForthNumber)} </p>
+        <p> ${FirstNumber} * ${SecondNumber} * ${ThirdNumbet} * ${ForthNumber} = ${product(FirstNumber,SecondNumber,ThirdNumbet,ForthNumber)} </p>
+        <p> arithmetic mean of ${FirstNumber}, ${SecondNumber}, ${ThirdNumbet}, ${ForthNumber} is ${mean(FirstNumber,SecondNumber,ThirdNumbet,ForthNumber)} </p>
+        <p> The least number of ${FirstNumber}, ${SecondNumber}, ${ThirdNumbet}, ${ForthNumber} is ${min(FirstNumber,SecondNumber,ThirdNumbet,ForthNumber)} </p>
+
+        `)
+      }
+    </script>
+  </body>
+</html>
+
