@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  </head>
+  <body>
+    <h1>Task 3</h1>
+    <p>
+      Дано масив імен учнів. З’ясувати скільки разів зустрічається ім’я «Іван».
+    </p>
+    <script>
+      let conf = confirm("Do you want to start testing?")
+      if(conf){
+        const names = ["Ivan", "Olena", "Mykola", "Daryna", "Andriy", "Ivan", "Oksana", "Serhiy", "Viktor", "Iryna", "Ivan", "Vladyslav"];
+
+        function getIvanCount(arr){
+          let count = 0 
+          for(let i = 0; i < arr.length; i++){
+            if(arr[i] === "Ivan"){
+              count++
+            } 
+          }
+          return count
+        }
+        document.write(`
+        <p>Names Array ${names}</p>
+        <p>There are ${getIvanCount(names)} Ivan(s) </p>
+        `)
+      }
+    </script>
+  </body>
+</html>
+

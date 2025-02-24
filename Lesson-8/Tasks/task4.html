@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Document</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+</head>
+
+<body>
+  <h1>Task 4</h1>
+  <p>
+    Дано послідовність номерів автомобілів. Підрахувати кількість номерів, які :</br>
+    починаються на букву «А»;</br>
+    перша і остання літери співпадають;</br>
+    складаються з більше ніш 5 символів;</br>
+  </p>
+  <script>
+    let conf = confirm("Do you want to start testing?");
+    if (conf) {
+      const licensePlates = [
+        "AP6520EC",
+        "AA4580PM",
+        "AB1974HM",
+        "AI5789EP",
+        "AI5463MB",
+        "AX7230KO",
+        "BC2036KO",
+        "BE4306CH",
+        "BH2392HM",
+        "BK7489HO"
+      ];
+
+      function getNumbersStartWithA(arr) {
+        let numbers = []
+        for (let i = 0; i < arr.length; i++) {
+          if (arr[i][0] === 'A') {
+            numbers.push(arr[i])
+          }
+        }
+        return numbers
+      }
+
+      function getEquelNumbers(arr) {
+        let numbers = []
+        for (let i = 0; i < arr.length; i++) {
+          for (let j = i + 1; j < arr.length; j++) {
+            const firstCharMatch = arr[i][0] === arr[j][0];
+            const lastCharMatch = arr[i][arr[i].length - 1] === arr[j][arr[j].length - 1];
+
+            if (firstCharMatch && lastCharMatch) {
+              if (!numbers.includes(arr[i])) numbers.push(arr[i]);
+              if (!numbers.includes(arr[j])) numbers.push(arr[j]);
+            }
+          }
+
+        }
+        return numbers
+      }
+
+      document.write(`
+      <p>  ${getNumbersStartWithA(licensePlates)} there are ${getNumbersStartWithA(licensePlates).length + 1} numbers start with A</p>
+      <p> Numbers with equel first and last character ${getEquelNumbers(licensePlates)} </p>
+      `)
+
+
+
+
+
+    }
+  </script>
+</body>
+
+</html>

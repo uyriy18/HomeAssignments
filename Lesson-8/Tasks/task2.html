@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  </head>
+  <body>
+    <h1>Task 2</h1>
+    <p>
+      Дано масив, який зберігає кількість відвідувачів магазину протягом тижня. Вивести на екран:</br>
+                    номери днів, протягом яких кількість відвідувачів була меншою за 20; </br>
+                    номери днів, коли кількість відвідувачів була мінімальною;</br>
+                    номери днів, коли кількість відвідувачів була максимальною;</br>
+                    загальну кількість клієнтів у робочі дні та окремо загальну кількість днів на вихідних.</br>
+    </p>
+    <script>
+      let conf = confirm("Do you want to start testing?");
+      if (conf) {
+        let customersCount = [];
+        const weekDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+
+
+        function setCustomersPerWeek (arr){
+          for(let i = 0; i < weekDays.length; i++){
+            arr.push(parseInt(prompt(`Enter the customers number for the day ${weekDays[i]}`)) || 50)
+          }
+        }
+        function getDataPerWeek(arrDays, arrCustomers){
+          for(let i = 0; i < arrDays.length; i++){
+            document.write(`<p>${arrDays[i]} : ${arrCustomers[i]}</p>`)
+          }
+        }
+
+        function getDaysLessTwentyCustomers(arr){
+          let badDays = []
+          for(let i = 0; i < arr.length; i++){
+            if(arr[i] < 20) badDays.push(weekDays[i])
+          }
+          return badDays
+        }
+
+        function getMinCustomersDay(arr){
+          let minDay = arr[0]
+          let dayIndex = 0
+          for(let i = 0; i < arr.length; i++){
+            if (arr[i] < minDay){
+              dayIndex = i
+              minDay = arr[i]
+            } 
+          }
+          return weekDays[dayIndex]
+        }
+        function getMaxCustomersDay(arr){
+          let maxDay = arr[0]
+          let dayIndex = 0
+          for(let i = 0; i < arr.length; i++){
+            if(maxDay < arr[i]) {
+              dayIndex=i
+              maxDay = arr[i]
+          }
+        }
+          return weekDays[dayIndex]
+        }
+        function getCustomersNumberInWorkingDays(arr){
+          let customerSum = 0
+          for(let i = 0; i < 4; i++){
+            customerSum += arr[i]
+          }
+          return customerSum
+        }
+        function getCustomersNumberInWeekends(arr){
+          let customerSum = 0
+          for(let i = 4; i < 6; i++){
+            customerSum += arr[i]
+          }
+          return customerSum
+        }
+        setCustomersPerWeek(customersCount)
+        getDataPerWeek(weekDays, customersCount)
+
+        document.write(`
+        <p>Customers less then 20 we in ${getDaysLessTwentyCustomers(customersCount)} </p>
+        <p>Minimum Customers were in ${getMinCustomersDay(customersCount)} </p>
+        <p>Maximum Customers were in ${getMaxCustomersDay(customersCount)} </p>
+        <p>In working days were ${getCustomersNumberInWorkingDays(customersCount)} cusomers</p>
+        <p>On weekend were ${getCustomersNumberInWeekends(customersCount)} customers </p>
+        `)
+        
+      }
+    </script>
+  </body>
+</html>

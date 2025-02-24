@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <style>
+    table {
+      width: 50%;
+      border-collapse: collapse;
+      margin: 20px auto;
+    }
+    th,
+    td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: center;
+    }
+    th {
+      background-color: #f4f4f4;
+    }
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+  </style>
+  <head>
+    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  </head>
+  <body>
+    <div id="table-container"></div>
+    <h1>Task 1</h1>
+    <p>
+      Дано масив, який містить оцінки з К предметів. Знайти середній бал і
+      з’ясувати до якої категорії він відноситься (відмінник, двійочник (має
+      хоча би одну двійку), хорошист (оцінки добре і відмінно), трійочник(є хоча
+      би одна трійка)).
+    </p>
+    <script>
+      let conf = confirm("Do you want to start testing?");
+      if (conf) {
+        const schoolSubjects = [
+          { subject: "Mathematics", score: 9 },
+          { subject: "English", score: 6 },
+          { subject: "Science", score: 11 },
+          { subject: "History", score: 4 },
+          { subject: "Geography", score: 7 },
+          { subject: "Physical Education", score: 10 },
+          { subject: "Art", score: 2 },
+          { subject: "Music", score: 12 },
+          { subject: "Computer Science", score: 5 },
+          { subject: "Chemistry", score: 8 },
+        ];
+        
+
+
+        const p1 = document.createElement("p")
+        const p2 = document.createElement("p")
+
+
+        function getScoresTable(data) {
+          const table = document.createElement("table");
+
+          const headerRow = table.insertRow();
+          const subjectHeader = document.createElement("th");
+          subjectHeader.textContent = "Subject";
+          const scoreHeader = document.createElement("th");
+          scoreHeader.textContent = "Score";
+          headerRow.append(subjectHeader, scoreHeader);
+
+          data.forEach(({ subject, score }) => {
+            const row = table.insertRow();
+            row.insertCell().textContent = subject;
+            row.insertCell().textContent = score;
+          });
+          return table;
+        }
+
+        function getAverageScore(arr) {
+          let averageScore = 0;
+          for (let i = 0; i < arr.length; i++) {
+            averageScore += arr[i].score;
+          }
+          return (averageScore / arr.length).toFixed(2);
+        }
+        function getRating(arr) {
+          let d = 0
+          let t = 0
+          let h = 0
+          for (let i = 0; i < arr.length; i++) {
+            if (arr[i].score < 3) {
+              d++
+            } else if (arr[i].score < 7) {
+              t++
+            } else if (arr[i].score < 9) {
+              h++
+            } 
+          }
+          if (d>0) {
+              return `Dviechnyk`;
+            } else if (t>0) {
+              return `Triechnyk`;
+            } else if (h>0) {
+              return `Horoshist`;
+            } else {
+              return `Vidminnyk`;
+            }
+        }
+        document.body.appendChild(getScoresTable(schoolSubjects))
+        const rating = getRating(schoolSubjects);
+        const average = getAverageScore(schoolSubjects);
+        p1.textContent = average
+        document.body.appendChild(p1)
+        p2.textContent = rating
+        document.body.appendChild(p2)
+        
+
+
+      }
+    </script>
+  </body>
+</html>
