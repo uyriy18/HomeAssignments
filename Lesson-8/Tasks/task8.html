@@ -18,31 +18,29 @@
       let conf = confirm("Do you want to start testing?");
       if (conf) {
         let priceArray = new Array(10).fill(0);
-        priceArray = priceArray.map((el)=> el = Math.floor(Math.random() * 1001) - 500)
-        let winSume = 0
-        let tryChance = true
+        priceArray = priceArray.map(
+          (el) => (el = Math.floor(Math.random() * 1001) - 500)
+        );
+        let winSume = 0;
+        let tryChance = true;
 
-
-        while(tryChance){
-          tryChance = confirm("Want to try your chance?")
-          let index = Math.floor(Math.random() * 10)
-          console.log(index)
-          if(priceArray[index] > 0 && tryChance){
-            winSume += priceArray[index]
-            alert(`You won ${priceArray[index]},  Now your credit is ${winSume}`) 
-          } else if(priceArray[index] < 0 && tryChance){
-            winSume += priceArray[index]
-            alert(`You lost ${priceArray[index]}, Now your credit is ${winSume}`)
+        while (tryChance) {
+          tryChance = confirm("Want to try your chance?");
+          let index = Math.floor(Math.random() * 10);
+          console.log(index);
+          if (priceArray[index] > 0 && tryChance) {
+            winSume += priceArray[index];
+            alert(
+              `You won ${priceArray[index]},  Now your credit is ${winSume}`
+            );
+          } else if (priceArray[index] < 0 && tryChance) {
+            winSume += priceArray[index];
+            alert(
+              `You lost ${priceArray[index]}, Now your credit is ${winSume}`
+            );
           }
         }
-        document.write(`You final sume is ${winSume}`)
-
-
-        
-
-        
-
-       
+        document.write(`You final sume is ${winSume}`);
       }
     </script>
   </body>
