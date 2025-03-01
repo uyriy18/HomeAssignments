@@ -1,33 +1,55 @@
 <!DOCTYPE html>
 <html>
-  <style>
-    .div {
-      gap: 5px;
+<style>
+  .div {
+    gap: 5px;
+  }
+</style>
+
+<head>
+  <title>Document</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+</head>
+
+<body>
+  <h1>Task 7</h1>
+  <p>
+    Дано послідовність платіжок протягом року. Знайти сумарну кількість грошей за:</br>
+    за весь рік;</br>
+    у першій половині року;</br>
+    у другій половині року;</br>
+    за літо;</br>
+    за ІІ квартал;</br>
+    за парні місяці (з парними номерами);</br>
+    за місяці, які є початковими у сезоні (весна, літо, осінь, зима).</br>
+  </p>
+  <script>
+    let conf = confirm("Do you want to start testing?");
+    if (conf) {
+      const moneyAmounts = [200, 220, 250, 270, 300, 320, 350, 370, 400, 420, 450, 500];
+      const sumeForYear = moneyAmounts.reduce((prevSume, sume) => prevSume + sume)
+      const sumeForTheFirstPartOfYear = moneyAmounts.reduce((prevSume, sume, index) => (index <= moneyAmounts.length / 2) ? prevSume + sume : prevSume, 0)
+      const sumeForTheSecondPartOfYear = moneyAmounts.reduce((prevSume, sume, index) => (index > moneyAmounts.length / 2) ? prevSume + sume : prevSume, 0)
+      const sumeForTheSummer = moneyAmounts.reduce((prevSume, sume, index) => (index > 5 && index < 9) ? prevSume + sume : prevSume, 0)
+      const sumeForTheSecondQuarter = moneyAmounts.reduce((prevSume, sume, index) => (index >= 4 && index < 7) ? prevSume + sume : prevSume, 0)
+      const sumeForThePairMonth = moneyAmounts.reduce((prevSume, sume, index) => (index % 2 === 0) ? prevSume + sume : prevSume, 0)
+      const sumeForTheFirstSeasonMonth = moneyAmounts.reduce((prevSume, sume, index) => (index % 3 === 0) ? prevSume + sume : prevSume, 0)
+
+
+      document.write(`
+        <p>Sume per Year = ${sumeForYear}</p>
+        <p>Sume in the first half of the Year = ${sumeForTheFirstPartOfYear}</p>
+        <p>Sume in the second half of the Year = ${sumeForTheSecondPartOfYear}</p>
+        <p>Sume for summer months = ${sumeForTheSummer}</p>
+        <p>Sume for second quarter = ${sumeForTheSecondQuarter}</p>
+        <p>Sume for pair months = ${sumeForThePairMonth}</p>
+        <p>Sume for first months in seasons = ${sumeForTheFirstSeasonMonth}</p>
+        `)
+
     }
-  </style>
-  <head>
-    <title>Document</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  </head>
-  <body>
-    <h1>Task 7</h1>
-    <p>
-      Дано послідовність платіжок протягом року. Знайти сумарну кількість грошей за:</br>
-        за весь рік;</br>
-        у першій половині року;</br>
-        у другій половині року;</br>
-        за літо;</br>
-        за ІІ квартал;</br>
-        за парні місяці (з парними номерами);</br>
-        за місяці, які є початковими у сезоні (весна, літо, осінь, зима).</br>
-    </p>
-    <script>
-      let conf = confirm("Do you want to start testing?");
-      if (conf) {
-        
-      }
-    </script>
-  </body>
+  </script>
+</body>
+
 </html>

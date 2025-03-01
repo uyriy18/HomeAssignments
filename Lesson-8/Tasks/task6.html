@@ -9,12 +9,54 @@
   <body>
     <h1>Task 6</h1>
     <p>
-      Дано послідовність цін товарів та назв (у окремих масивах). 
-      Вивести на екран ті, які може собі дозволити користувач (кількість грошей задається).
+      Дано послідовність цін товарів та назв (у окремих масивах). Вивести на
+      екран ті, які може собі дозволити користувач (кількість грошей задається).
     </p>
     <script>
       let conf = confirm("Do you want to start testing?");
       if (conf) {
+        const goods = [
+          "Laptop",
+          "Smartphone",
+          "Tablet",
+          "Headphones",
+          "Smartwatch",
+          "Keyboard",
+          "Mouse",
+          "Monitor",
+          "Printer",
+          "Speaker",
+        ];
+        const prices = [150, 300, 500, 700, 250, 400, 120, 900, 1000, 650];
+        const moneyAmount =
+          parseInt(prompt("Enter the sume of money you have")) || 500;
+  
+        const indexArray = getIndexes(prices, moneyAmount)
+        const availableGoods = getGoodsByIndexes(indexArray, goods)
+        getGoodsWithPrices(availableGoods,prices,indexArray)
+
+        function getIndexes(arr, sume) {
+          let resultArr = [];
+          for (let i = 0; i < arr.length; i++) {
+            if (arr[i] >= sume) resultArr.push(i);
+          }
+          return resultArr;
+        }
+
+        function getGoodsByIndexes (indexArr, goodsArr){
+          let resultArray = []
+          for(let i =0; i < indexArr.length; i++){
+            resultArray.push(goodsArr[indexArr[i]])
+          }
+        return resultArray
+        }
+        function getGoodsWithPrices(arrGoods, arrPrices, arrIndexes){
+          for(let i =0; i< arrGoods.length; i++){
+            document.write(`
+            <p> ${arrGoods[i]} price is ${arrPrices[arrIndexes[i]]}</p>
+            `)
+          }
+        }
         
       }
     </script>

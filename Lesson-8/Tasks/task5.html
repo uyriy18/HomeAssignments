@@ -1,27 +1,41 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Document</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    
-  </head>
-  <body>
-    <h1>Task 5</h1>
-    <p>
-      Дано послідовність оцінок учня. Підрахувати кількість:</br>
-        1)	двійок</br>
-        2)	кількість хороших оцінок (добре, відмінно);</br>
-        3)	кількість оцінок, які нижче середнього.</br>
-    </p>
-    <div id ="app">
+
+<head>
+  <title>Document</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+</head>
+
+<body>
+  <h1>Task 5</h1>
+  <p>
+    Дано послідовність оцінок учня. Підрахувати кількість:</br>
+    1) двійок</br>
+    2) кількість хороших оцінок (добре, відмінно);</br>
+    3) кількість оцінок, які нижче середнього.</br>
+  </p>
+  <div id="app">
     <script>
       let conf = confirm("Do you want to start testing?")
-      if(conf){
-   
+      if (conf) {
+        const scores = [4, 3, 7, 8, 12, 10, 4, 2, 9]
+        const count2 = scores.reduce((count, score) => (score >= 1 && score < 4) ? count + 1 : count, 0)
+        const goodScores = scores.reduce((count, score) => score >= 7? count + 1: count, 0)
+        const avarageScore = Math.round(scores.reduce((score, sum) => score + sum)/scores.length)
+        const lessThanAvarageScore = scores.reduce((count, score) => (score < avarageScore) ? count + 1 : count, 0)
+
+        document.write(`
+        <p>count of scores from 1 to 3 - ${count2}</p>
+        <p>count of scores up to 7 - ${goodScores}</p>
+        <p>Avarage score is ~ ${avarageScore}, count of scores < ${avarageScore} is ${lessThanAvarageScore}</p>
+        `)
+
       }
     </script>
-    </div> 
-  </body>
+  </div>
+</body>
+
 </html>
