@@ -16,7 +16,12 @@
   <script>
     let conf = confirm("Do you want to start testing?");
     if (conf) {
-      
+      let arr = new Array(10).fill(0)
+      for (let i = 0; i < arr.length; i++) {
+        arr[i] = Math.floor(Math.random() * (200- 10 + 1))     
+      }
+      let newArray = arr.filter((x) => x>100)
+      document.write(newArray)    
     }
   </script>
 </body>

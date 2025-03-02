@@ -14,7 +14,12 @@
     <script>
       let conf = confirm("Do you want to start testing?");
       if (conf) {
-        
+        let carNumbers = ["CB9455AB", "AA1023ZX", "BE8792YT", "CB4000BC", "AB1234FG", "BB5678EP", "AE2345MJ", "AA7654LN", "BK8721GH", "CC5421RP"];
+        let startedWithA = carNumbers.filter((element) => element[0] === 'A')
+        document.write(`
+        <p>Car numbers array - ${carNumbers}</p>       
+        <p>Started with A - ${startedWithA}</p>     
+        `)
       }
     </script>
   </body>

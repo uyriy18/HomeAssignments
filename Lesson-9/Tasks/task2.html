@@ -14,7 +14,11 @@
     <script>
       let conf = confirm("Do you want to start testing?");
       if (conf) {
-        
+        const arrLength = parseInt(prompt("Enter array length")) || 10 
+        let array = new Array(arrLength)
+        array.fill(0, 0, arrLength/2)
+        array.fill(7, arrLength/2)
+        document.write(array)
       }
     </script>
   </body>

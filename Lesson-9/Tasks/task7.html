@@ -21,7 +21,10 @@
   <script>
     let conf = confirm("Do you want to start testing?");
     if (conf) {
-      
+      let prices = [1000, 800, 6000, 400, 200, 2000, 200, 4000, 60, 10000]
+      document.write(`<p>Origin prices: ${prices}</p>`)
+      prices = prices.map((element) => element > 1000 ? element * 0.7 : element)
+      document.write(`<p>Disount prices: ${prices}</p>`)
     }
   </script>
 </body>

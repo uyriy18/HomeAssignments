@@ -9,15 +9,27 @@
   <body>
     <h1>Task 3</h1>
     <p>
-      Користувач вводить кількість елементів. Створити масив, у якому перші 5 елементів заповнені 1-цями, а інші до кінця масиву заповнені 7-ками.<br>
-      Тут використати цикл for..of
+      Користувач вводить кількість елементів. Створити масив, у якому перші 5
+      елементів заповнені 1-цями, а інші до кінця масиву заповнені 7-ками.<br />
+      Тут використати цикл for
     </p>
     <script>
-      let conf = confirm("Do you want to start testing?")
-      if(conf){
-        
+      let conf = confirm("Do you want to start testing?");
+      if (conf) {
+        let arrLength = parseInt(prompt("Enter array length")) || 10;
+        let array = new Array(arrLength);
+        let count = 0;
+
+        for (let i = 0; i < arrLength; i++) {
+          if (count < 5) {
+            array[i] = 1;
+            count++;
+          } else {
+            array[i] = 7;
+          }
+        }
+        document.write(array);
       }
     </script>
   </body>
 </html>
-

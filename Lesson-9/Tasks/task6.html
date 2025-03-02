@@ -14,7 +14,12 @@
     <script>
       let conf = confirm("Do you want to start testing?");
       if (conf) {
-        
+        let arr = [5, -8, -6, -4, 0, 2, 20, 4, 6, 8]
+        document.write(`<p>Origin array: ${arr}</p>`)
+        arr.forEach((element, index) => {
+          element > arr[0] ? arr[index] = element * 2 : element
+        })
+        document.write(`<p>Modified array: ${arr}</p>`)
       }
     </script>
   </body>

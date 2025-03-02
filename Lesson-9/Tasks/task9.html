@@ -14,7 +14,12 @@
     <script>
       let conf = confirm("Do you want to start testing?");
       if (conf) {
-        
+        const names = ['Olexandr', 'Dmytro', 'Andriy', 'Iryna', 'Svitlana', 'Olena', 'Viktor', 'Yulia', 'Tetiana', 'Roman'];
+        const firstLettersArr = names.map((element) => element[0])
+        document.write(`
+        <p>Names array - ${names}</p>       
+        <p>First letters array - ${firstLettersArr}</p>     
+        `)      
       }
     </script>
   </body>

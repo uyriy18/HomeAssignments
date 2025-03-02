@@ -14,12 +14,19 @@
   <p>
     Дано масив елементів. Знайти добуток додатних елементів
   </p>
-    <script>
-      let conf = confirm("Do you want to start testing?")
-      if (conf) {
-        
-      }
-    </script>
+  <script>
+    let conf = confirm("Do you want to start testing?")
+    if (conf) {
+      let array = [-100, -80, -60, -40, -20, 2, 20, 40, 60, 80]
+      let prod = array.reduce((prevValue, pr) => (pr > 0) ? pr * prevValue : prevValue, 1)
+      document.write(`
+      <p>${array}</p>
+      <p>Product of all positive mumbers is ${prod}</p>
+
+      `
+      )
+    }
+  </script>
   </div>
 </body>
 
