@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Document</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+</head>
+
+<body>
+  <h1>Task 4</h1>
+  <p>
+    Сформувати новий масив, що міститиме значення цін у відсотках стосовно максимального
+  </p>
+  <script>
+    let conf = confirm("Do you want to start testing?");
+    if (conf) {
+      const stockPrices = generateStockPrices(30)
+      const maxValue = stockPrices.reduce((max, current)=> max < current? current: max, stockPrices[0])
+      let newArray = stockPrices.map((element) => Math.round(element/maxValue*100))
+
+      document.write(`
+        <p>Origin array - ${stockPrices}</p>
+        <p>Max element = ${maxValue}</p>
+        `)
+
+        for (const element of newArray) {
+          document.write(`<p>${element}%</p>`);
+        }
+        
+      function generateStockPrices(size) {
+          return Array.from(
+            { length: size },() => Math.floor(Math.random() * 10000) + 1);
+          }
+    }
+  </script>
+</body>
+
+</html>

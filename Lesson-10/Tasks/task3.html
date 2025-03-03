@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  </head>
+  <body>
+    <h1>Task 3</h1>
+    <p>Сформувати список з тих цін, які більші за попереднє значення</p>
+    <script>
+      let conf = confirm("Do you want to start testing?");
+      if (conf) {
+        const stockPrices = generateStockPrices(30);
+
+        let newArray = stockPrices.filter(
+          (element, index) => element > stockPrices[index - 1] && index > 0
+        );
+
+        document.write(`Origin array - ${stockPrices}`)
+
+        for (const element of newArray) {
+          document.write(`<p>${element}</p>`);
+        }
+        function generateStockPrices(size) {
+          return Array.from(
+            { length: size },
+            () => Math.floor(Math.random() * 10000) + 1
+          );
+        }
+      }
+    </script>
+  </body>
+</html>

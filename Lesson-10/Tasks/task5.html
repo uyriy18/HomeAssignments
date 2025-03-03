@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Document</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+</head>
+
+<body>
+  <h1>Task 5</h1>
+  <p>
+    Підрахувати кількість змін цін
+  </p>
+  <script>
+    let conf = confirm("Do you want to start testing?")
+    if (conf) {
+      const stockPrices = [3000, 3000, 3000, 3000, 3200, 3200, 3000, 3000, 3400, 3405, 
+                       3404, 3400, 3400, 3400, 3400, 3405, 3400, 3400, 3400, 3400, 
+                       3400, 3400, 3000, 3000, 3000, 3000, 3000, 3000, 3400, 3400];
+      
+      let changes = stockPrices.filter((element, index) => (element !== stockPrices[index - 1]) && index>0)
+      document.write(`
+      <p>${stockPrices}</p>
+      <p>price was changed ${changes.length} times</p>
+      
+      `)
+      
+    }
+  </script>
+  </div>
+</body>
+
+</html>

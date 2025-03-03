@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  </head>
+  <body>
+    <h1>Task 6</h1>
+    <p>
+      Визначити, чи є ціна, що менше 1000
+    </p>
+    <script>
+      let conf = confirm("Do you want to start testing?");
+      if (conf) {
+        const stockPrices = generateStockPrices(30)
+        const isLessThan1000 = stockPrices.some((el) => el < 1000)
+
+        document.write(`
+        <p>${stockPrices}</p>
+        <p>${getAnswer(isLessThan1000)}</p>
+        `)
+        function generateStockPrices(size) {
+          return Array.from(
+            { length: size },() => Math.floor(Math.random() * 10000) + 1);
+          }
+        function getAnswer(isPriceLess1000){
+          let message
+          if(isPriceLess1000){
+            message = "Yes there is a price less then 1000"
+          } else{
+            message = "No there is no price less then 1000"
+          }
+          return message
+        }
+      }
+    </script>
+  </body>
+</html>
