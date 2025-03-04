@@ -16,6 +16,12 @@
       if (conf) {
         const stockPrices = generateStockPrices(30)
 
+        let firstMore1000 = stockPrices.find((price)=> price > 1000)
+        document.write(`
+        <p>${stockPrices}</p>
+        <p>First price more than 1000 is ${firstMore1000}</p>
+        `)
+
         function generateStockPrices(size) {
           return Array.from(
             { length: size },() => Math.floor(Math.random() * 10000) + 1);

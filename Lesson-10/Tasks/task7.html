@@ -22,11 +22,29 @@
     let conf = confirm("Do you want to start testing?");
     if (conf) {
       const stockPrices = generateStockPrices(30)
+      const isAllMore1000 = stockPrices.every((element) => element > 1000)
+
+      document.write(`
+      <p>${stockPrices}</p>
+      <p>${getAnswer(isAllMore1000)}</p>
+      `)
+
+      function getAnswer(isAll){
+        let message
+        if(isAll){
+          message = "All prices are more than 1000"
+        }
+        else{
+          message = "Not all prices is more than 1000"
+        }
+        return message
+      }
 
       function generateStockPrices(size) {
           return Array.from(
             { length: size },() => Math.floor(Math.random() * 10000) + 1);
           }
+
     }
   </script>
 </body>

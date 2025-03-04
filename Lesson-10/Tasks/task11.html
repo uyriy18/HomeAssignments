@@ -15,6 +15,11 @@
       let conf = confirm("Do you want to start testing?");
       if (conf) {
         const stockPrices = generateStockPrices(30)
+        let firstIndexMore1000 = stockPrices.findIndex((price)=> price > 5000)
+        document.write(`
+        <p>${stockPrices}</p>
+        <p>First index of price more than 5000 is ${firstIndexMore1000}</p>
+        `)
 
         function generateStockPrices(size) {
           return Array.from(

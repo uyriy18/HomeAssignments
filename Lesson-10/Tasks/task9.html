@@ -16,6 +16,12 @@
       if (conf) {
         const stockPrices = generateStockPrices(30)
 
+        let pricesSumMore1000 = stockPrices.reduce((sum, price)=> price > 1000 ? sum + price: sum, 0)
+        document.write(`
+        <p>${stockPrices}</p>
+        <p>The total sume for the prices more than 1000 is ${pricesSumMore1000}</p>
+        `)
+
         function generateStockPrices(size) {
           return Array.from(
             { length: size },() => Math.floor(Math.random() * 10000) + 1);
