@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  </head>
+  <body>
+    <h1>Task 2</h1>
+    <p>
+      Дано інформацію про прибуток К магазинів протягом тижня. Знайти :<br />
+      Знайти суми елементів у вказаній області (зафарбована область охоплює
+      відповідну половину рядків і стовпців) <br />
+      1) загальний прибуток кожного масиву за тиждень; <br />
+      2) загальний прибуток усіх магазинів по дням (загальний прибуток усіх
+      магазинів за понеділок, за вівторок, і т.д.) <br />
+      3) загальний прибуток за робочі дні <br />
+      4) загальний прибуток за вихідні дні <br />
+      5) максимальний прибуток за середу <br />
+      6) сформувати загальний список (одновимірний масив) зі значенням, які що
+      більші за 200 <br />
+      7) відсортувати кожен тиждень за зростанням <br />
+      8) відсортувати тижні (рядки) за спаданням максимального елементи у цьому
+      тижні (рядку), тобто при порівнянні рядків потрібно порівнювати
+      максимальні елементи у кожному з цих рядків <br />
+      9) упорядкувати тижні (рядки) за спаданням суми елементів у рядку (тобто
+      при порівнянні двох рядків треба знайти суму кожного з рядків і
+      порівнювати ці суми, на основі цих сум буде зрозуміло, який з елементів
+      повинен іти раніше). <br />
+    </p>
+    <script>
+      let conf = confirm("Do you want to start testing?");
+      if (conf) {
+        const arr = [
+          [1011, 1112, 1321, 4204, 1105, 10061, 10147],
+          [111, 1210, 1301, 3114, 2145, 7416, 8017],
+          [2110, 2214, 2347, 1424, 2475, 8026, 5727],
+        ];
+
+        document.body.innerHTML += displayArrayAsTable(arr);
+
+        document.write(`
+        <h3>загальний прибуток кожного масиву за тиждень</h3>
+        <p> First shop revenue for the week ${arr[0].reduce((sum, day) => sum+=day)}</p>
+        <p> Second shop revenue for the week ${arr[1].reduce((sum, day) => sum+=day)}</p>
+        <p> Third shop revenue for the week ${arr[2].reduce((sum, day) => sum+=day)}</p>
+        <h3>загальний прибуток усіх магазинів по дням (загальний прибуток усіх магазинів за понеділок, за вівторок, і т.д.)</h3>
+        <p> Monday total revenue ${arr.reduce((sum, day) => sum+=day[0], 0)}
+        <p> Tuesday total revenue ${arr.reduce((sum, day) => sum+=day[1], 0)}
+        <p> Wednesday total revenue ${arr.reduce((sum, day) => sum+=day[2], 0)}
+        <p> Thursday total revenue ${arr.reduce((sum, day) => sum+=day[3], 0)}
+        <p> Friday total revenue ${arr.reduce((sum, day) => sum+=day[4], 0)}
+        <p> Saturday total revenue ${arr.reduce((sum, day) => sum+=day[5], 0)}
+        <p> Sunday total revenue ${arr.reduce((sum, day) => sum+=day[6], 0)}
+        <h3>загальний прибуток за робочі дні ${arr.reduce((sum, day) => {return sum + day.splice(0,5).reduce((sum,day)=>sum += day ,0)}, 0)}</h3>
+        <h3>загальний прибуток за вихідні дні ${arr.reduce((sum, day) => sum+=day[6], 0)}</h3>
+        `)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        function displayArrayAsTable(arr) {
+          let tableHTML =
+            "<table border='1' cellspacing='0' cellpadding='5' style='border-collapse: collapse; text-align: center;'>";
+
+          for (let i = 0; i < arr.length; i++) {
+            tableHTML += "<tr>";
+            for (let j = 0; j < arr[i].length; j++) {
+              tableHTML += `<td style='padding: 5px;'>${arr[i][j]}</td>`;
+            }
+            tableHTML += "</tr>";
+          }
+
+          tableHTML += "</table>";
+
+          return tableHTML;
+        }
+
+
+      }
+    </script>
+  </body>
+</html>

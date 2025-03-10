@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  </head>
+
+  <body>
+    <div id="table-container"></div>
+    <h1>Task 1</h1>
+    <p>
+      Знайти суми елементів у вказаній області (зафарбована область охоплює
+      відповідну половину рядків і стовпців) <br />
+      1) номери рядків від 0 до половини, стовпці від 0 до половини <br />
+      2) номери рядків від 0 до половини, стовпці від половини до кінця <br />
+      3) номери рядків від половини до кінця, стовпці від 0 до половини <br />
+      4) номери рядків від половини до кінця , стовпці від половини до кінця
+      <br />
+      5) Суму парних рядків <br />
+      6) Суму непарних стовпців <br />
+      7) У парних рядках – непарні стовпці, у непарних – парні. <br />
+    </p>
+    <script>
+      let conf = confirm("Do you want to start testing?");
+      if (conf) {
+        const arr = [
+          [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+          [11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+          [21, 22, 23, 24, 25, 26, 27, 28, 29, 30],
+          [31, 32, 33, 34, 35, 36, 37, 38, 39, 40],
+          [41, 42, 43, 44, 45, 46, 47, 48, 49, 50],
+          [51, 52, 53, 54, 55, 56, 57, 58, 59, 60],
+          [61, 62, 63, 64, 65, 66, 67, 68, 69, 70],
+          [71, 72, 73, 74, 75, 76, 77, 78, 79, 80],
+          [81, 82, 83, 84, 85, 86, 87, 88, 89, 90],
+          [91, 92, 93, 94, 95, 96, 97, 98, 99, 100],
+        ];
+
+        document.body.innerHTML += displayArrayAsTable(arr);
+
+        document.write(`
+        
+        <p> номери рядків від 0 до половини, стовпці від 0 до половини - ${getFirstQuoterNumbers(
+          arr,
+          arr.length / 2,
+          arr.length / 2
+        )}</p>
+        <p> номери рядків від 0 до половини, стовпці від половини до кінця - ${getFirstQuoterNumbers(
+          arr,
+          arr.length / 2,
+          arr.length,
+          0,
+          arr.length / 2
+        )}</p>
+        <p> номери рядків від половини до кінця, стовпці від 0 до половини - ${getFirstQuoterNumbers(
+          arr,
+          arr.length,
+          arr.length / 2,
+          arr.length / 2,
+          0
+        )}</p>
+        <p> номери рядків від половини до кінця , стовпці від половини до кінця - ${getFirstQuoterNumbers(
+          arr,
+          arr.length,
+          arr.length,
+          arr.length / 2,
+          arr.length / 2
+        )}</p>
+        <p> Суму парних рядків - ${getSum(arr, true)}</p>
+        <p> Суму непарних рядків - ${getSum(arr, false)}</p>
+        <p> У парних рядках – непарні стовпці - ${getOddRowsArray(arr)} </p>
+        <p> у непарних – парні. - ${getEvenRowsArray(arr)}</p>
+        `);
+
+        function getFirstQuoterNumbers(
+          arr,
+          endRows,
+          endColums,
+          startRows = 0,
+          startColums = 0
+        ) {
+          let resultArray = [];
+          for (let i = startRows; i < endRows; i++) {
+            for (let j = startColums; j < endColums; j++) {
+              resultArray.push(arr[i][j]);
+            }
+          }
+          return resultArray;
+        }
+
+        function getSum(arr, odd) {
+          let sum = 0;
+          if (odd) {
+            for (let i = 0; i < arr.length; i++) {
+              for (let j = 0; j < arr.length; j++) {
+                if (arr[i][j] % 2 === 0) {
+                  sum += arr[i][j];
+                }
+              }
+            }
+          } else {
+            for (let i = 0; i < arr.length; i++) {
+              for (let j = 0; j < arr.length; j++) {
+                if (arr[i][j] % 3 === 0) {
+                  sum += arr[i][j];
+                }
+              }
+            }
+          }
+
+          return sum;
+        }
+
+        function getOddRowsArray(arr){
+          let resultArr = []
+          for (let i = 1; i < arr.length; i+=2) {
+              for (let j = 0; j < arr.length; j+=2) {
+                resultArr.push(arr[i][j]);
+              }
+            }
+            return resultArr
+        }
+        function getEvenRowsArray(arr){
+          let resultArr = []
+          for (let i = 0; i < arr.length; i+=2) {
+              for (let j = 1; j < arr.length; j+=2) {
+                resultArr.push(arr[i][j]);
+              }
+            }
+            return resultArr
+        }
+
+        function displayArrayAsTable(arr) {
+          let tableHTML =
+            "<table border='1' cellspacing='0' cellpadding='5' style='border-collapse: collapse; text-align: center;'>";
+
+          for (let i = 0; i < arr.length; i++) {
+            tableHTML += "<tr>";
+            for (let j = 0; j < arr[i].length; j++) {
+              tableHTML += `<td style='padding: 5px;'>${arr[i][j]}</td>`;
+            }
+            tableHTML += "</tr>";
+          }
+
+          tableHTML += "</table>";
+
+          return tableHTML;
+        }
+      }
+    </script>
+  </body>
+</html>
