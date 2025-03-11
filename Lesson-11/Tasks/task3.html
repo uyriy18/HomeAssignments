@@ -8,11 +8,97 @@
   </head>
   <body>
     <h1>Task 3</h1>
-    <p>Морський бій. Випадковим чином на двовимірному полі розміром 6*6 розташовується 5 кораблів. Користувач стріляє вказуючи координати. Гра продовжується поки не потоплено усі кораблі або у користувача не закінчаться снаряди.</p>
+    <p>
+      Морський бій. Випадковим чином на двовимірному полі розміром 6*6
+      розташовується 5 кораблів. Користувач стріляє вказуючи координати. Гра
+      продовжується поки не потоплено усі кораблі або у користувача не
+      закінчаться снаряди.
+    </p>
     <script>
       let conf = confirm("Do you want to start testing?");
       if (conf) {
-        
+        let battleFieldArray = [
+          ["", "", "", "", "", ""],
+          ["", "", "", "", "", ""],
+          ["", "", "", "", "", ""],
+          ["", "", "", "", "", ""],
+          ["", "", "", "", "", ""],
+          ["", "", "", "", "", ""],
+        ];
+
+        fillArrayWithShips(battleFieldArray);
+
+        let atemptsCount = 5
+
+        while(atemptsCount>0){
+
+          let firstCoordinate = parseInt(prompt("Enter the number of row from 1 to 6"))
+          let secondCoordinate = parseInt(prompt("Enter the number of column from 1 to 6"))
+          alert(checkShot(firstCoordinate-1,secondCoordinate-1))
+
+
+          atemptsCount--
+        }
+        document.body.innerHTML += displayArrayAsTable(battleFieldArray);
+        document.write(`
+        <p>O - ship</p>
+        <p>X - shot</p>
+        <p>$ - sank ship</p>
+        `)
+
+
+
+        function checkShot(row, column){
+          let message = ''
+          if(battleFieldArray[row][column] === ''){
+            message = "You missed!"
+            battleFieldArray[row][column] = 'X'
+          } else if(battleFieldArray[row][column] === 0){
+            message = "You sank the ship!!!"
+            battleFieldArray[row][column] = '$'
+          } else {
+            message = "Shot was out of the field!"
+          }
+          return message
+        }
+
+
+
+
+
+        function fillArrayWithShips(arr) {
+          let totalShips = 5;
+          while (totalShips > 0) {
+            const randomRow = returnRandomNumber(arr.length);
+            const randomCol = returnRandomNumber(arr[randomRow].length);
+            if(arr[randomRow][randomCol] === ''){
+              arr[randomRow][randomCol] = 0
+              totalShips--
+            }
+          }
+          
+        }
+
+        function returnRandomNumber(num) {
+          return Math.floor(Math.random() * num);
+        }
+
+        function displayArrayAsTable(arr) {
+          let tableHTML =
+            "<table border='1' cellspacing='0' cellpadding='5' style='border-collapse: collapse; text-align: center;'>";
+
+          for (let i = 0; i < arr.length; i++) {
+            tableHTML += "<tr>";
+            for (let j = 0; j < arr[i].length; j++) {
+              tableHTML += `<td style='padding: 5px; height: 15px; width: 15px;'>${arr[i][j]}</td>`;
+            }
+            tableHTML += "</tr>";
+          }
+
+          tableHTML += "</table>";
+
+          return tableHTML;
+        }
       }
     </script>
   </body>

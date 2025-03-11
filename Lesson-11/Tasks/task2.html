@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   </head>
+
   <body>
     <h1>Task 2</h1>
     <p>
@@ -39,37 +40,83 @@
         ];
 
         document.body.innerHTML += displayArrayAsTable(arr);
+        let arrMore200 = arr.flat().filter((max) => max > 200);
+        let sortedByShopsArrayAcc = arr.map((row) =>
+          [...row].sort((a, b) => a - b)
+        )
+        let sortedByShopsArrayDesc = arr.map((row) =>
+          [...row].sort((a, b) => b - a)
+        )
+        let sortedByTotalRevenueArray = [...arr].sort((a,b,) => 
+        a.reduce((sum, prevEl) => sum + prevEl, 0) -
+        b.reduce((sum, prevEl) => sum + prevEl, 0))
+        
 
         document.write(`
         <h3>загальний прибуток кожного масиву за тиждень</h3>
-        <p> First shop revenue for the week ${arr[0].reduce((sum, day) => sum+=day)}</p>
-        <p> Second shop revenue for the week ${arr[1].reduce((sum, day) => sum+=day)}</p>
-        <p> Third shop revenue for the week ${arr[2].reduce((sum, day) => sum+=day)}</p>
+        <p> First shop revenue for the week ${arr[0].reduce(
+          (sum, day) => (sum += day)
+        )}</p>
+        <p> Second shop revenue for the week ${arr[1].reduce(
+          (sum, day) => (sum += day)
+        )}</p>
+        <p> Third shop revenue for the week ${arr[2].reduce(
+          (sum, day) => (sum += day)
+        )}</p>
         <h3>загальний прибуток усіх магазинів по дням (загальний прибуток усіх магазинів за понеділок, за вівторок, і т.д.)</h3>
-        <p> Monday total revenue ${arr.reduce((sum, day) => sum+=day[0], 0)}
-        <p> Tuesday total revenue ${arr.reduce((sum, day) => sum+=day[1], 0)}
-        <p> Wednesday total revenue ${arr.reduce((sum, day) => sum+=day[2], 0)}
-        <p> Thursday total revenue ${arr.reduce((sum, day) => sum+=day[3], 0)}
-        <p> Friday total revenue ${arr.reduce((sum, day) => sum+=day[4], 0)}
-        <p> Saturday total revenue ${arr.reduce((sum, day) => sum+=day[5], 0)}
-        <p> Sunday total revenue ${arr.reduce((sum, day) => sum+=day[6], 0)}
-        <h3>загальний прибуток за робочі дні ${arr.reduce((sum, day) => {return sum + day.splice(0,5).reduce((sum,day)=>sum += day ,0)}, 0)}</h3>
-        <h3>загальний прибуток за вихідні дні ${arr.reduce((sum, day) => sum+=day[6], 0)}</h3>
-        `)
+        <p> Monday total revenue ${arr.reduce((sum, day) => (sum += day[0]), 0)}
+        <p> Tuesday total revenue ${arr.reduce(
+          (sum, day) => (sum += day[1]),
+          0
+        )}
+        <p> Wednesday total revenue ${arr.reduce(
+          (sum, day) => (sum += day[2]),
+          0
+        )}
+        <p> Thursday total revenue ${arr.reduce(
+          (sum, day) => (sum += day[3]),
+          0
+        )}
+        <p> Friday total revenue ${arr.reduce((sum, day) => (sum += day[4]), 0)}
+        <p> Saturday total revenue ${arr.reduce(
+          (sum, day) => (sum += day[5]),
+          0
+        )}
+        <p> Sunday total revenue ${arr.reduce((sum, day) => (sum += day[6]), 0)}
+       <h3>загальний прибуток за робочі дні</h3>
+      <p>${arr.reduce(
+        (sum, day) =>
+          sum + day.slice(0, 5).reduce((subSum, value) => subSum + value, 0),
+        0
+      )}</p>
+
+      <h3>загальний прибуток за вихідні дні</h3>
+      <p>${arr.reduce((sum, day) => sum + day[5] + day[6], 0)}</p>
+
+      <h3>максимальний прибуток за середу</h3>
+      <p>${Math.max(...arr.map((day) => day[2]))} </p>
+
+      <h3>сформувати загальний список (одновимірний масив) зі значенням, які що
+          більші за 200</h3>
+      <p>${arrMore200} </p>
+
+       <h3>відсортувати кожен тиждень за зростанням 
+       (В масиві один тиждень і три магазини, сортування буже здійснюватись кожному магазину за зростанням)</h3>
+      <p>${sortedByShopsArrayAcc} </p>
+
+      <h3>відсортувати тижні (рядки) за спаданням максимального елементи у цьому
+      тижні (рядку), тобто при порівнянні рядків потрібно порівнювати
+      максимальні елементи у кожному з цих рядків</h3>
+      <p>${sortedByShopsArrayDesc} </p>
+
+      <h3>упорядкувати тижні (рядки) за спаданням суми елементів у рядку (тобто
+      при порівнянні двох рядків треба знайти суму кожного з рядків і
+      порівнювати ці суми, на основі цих сум буде зрозуміло, який з елементів
+      повинен іти раніше)</h3>
+      <p>${sortedByTotalRevenueArray} </p>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+        `);
 
         function displayArrayAsTable(arr) {
           let tableHTML =
@@ -87,8 +134,6 @@
 
           return tableHTML;
         }
-
-
       }
     </script>
   </body>
