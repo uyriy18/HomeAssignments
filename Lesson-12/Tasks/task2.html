@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  </head>
+
+  <body>
+    <h1>Task 2</h1>
+    <p>
+      Дано масив 30 випадкових цілих чисел. Підрахувати скільки було обмінів та
+      порівнянь чисел під час сортування змішуванням.
+    </p>
+    <script>
+      let conf = confirm("Do you want to start testing?");
+      if (conf) {
+        let numbersSwapped = 0
+        let comparisonsCount = 0
+        const randomNumbers = Array.from(
+          { length: 30 },
+          () => Math.floor(Math.random() * 100) + 1
+        );
+        document.write(`
+          <p>Initial array ${randomNumbers}</p>
+          <p>Sorted array  ${shakerSort(randomNumbers)}</p>
+          <p>Numbers were swapped ${numbersSwapped} times</p>
+          <p>Numbers were compared ${comparisonsCount} </p>
+        `);
+
+        function shakerSort(arr) {
+          let left = 0;
+          let right = arr.length - 1;
+          let temp;
+          let swapped;
+
+          do {
+            swapped = false;
+            for (let i = left; i < right; i++) {
+              comparisonsCount++
+              if (arr[i] > arr[i + 1]) {
+                temp = arr[i];
+                arr[i] = arr[i + 1];
+                arr[i + 1] = temp;
+                swapped = true;
+                numbersSwapped++;
+              }
+            }
+            right--;
+            for (let i = right; i > left; i--) {
+              comparisonsCount++
+              if (arr[i] < arr[i - 1]) {
+                temp = arr[i];
+                arr[i] = arr[i - 1];
+                arr[i - 1] = temp;
+                swapped = true;
+                numbersSwapped++;
+              }
+            }
+            left++;
+          } while (swapped);
+
+          return arr;
+        }
+      }
+    </script>
+  </body>
+</html>

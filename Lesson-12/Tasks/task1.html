@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  </head>
+
+  <body>
+    <div id="table-container"></div>
+    <h1>Task 1</h1>
+    <p>
+      Дано масив 30 випадкових цілих чисел. Підрахувати скільки було обмінів та
+      порівнянь чисел під час сортування бульбашкою
+    </p>
+    <script>
+      let conf = confirm("Do you want to start testing?");
+      if (conf) {
+        let numbersSwapped  = 0
+        const randomNumbers = Array.from({ length: 30 },() => Math.floor(Math.random() * 100) + 1)
+        document.write(`
+          <p>Initial array ${randomNumbers}</p>
+          <p>Sorted array  ${bubbleSort(randomNumbers, randomNumbers.length)}</p>
+          <p>Numbers were swapped ${numbersSwapped} times</p>
+        `)
+
+        function bubbleSort(arr, maxIndex) {
+          let temp;
+          let swapped;
+          for (let i = 0; i < maxIndex - 1; i++) {
+            swapped = false
+            for (let j = 0; j < maxIndex - i - 1; j++) {
+              if (arr[j] > arr[j + 1]) {
+                temp = arr[j]
+                arr[j] = arr[j + 1]
+                arr[j + 1] = temp
+                swapped = true
+                numbersSwapped ++
+              }
+            }
+            if (swapped == false) break
+          }
+          return arr
+        }
+      }
+    </script>
+  </body>
+</html>

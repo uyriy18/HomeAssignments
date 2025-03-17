@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  </head>
+
+  <body>
+    <h1>Task 3</h1>
+    <p>
+      Дано масив 30 випадкових цілих чисел. Підрахувати скільки було обмінів та
+      порівнянь чисел під час сортування включеннями.
+    </p>
+    <script>
+      let conf = confirm("Do you want to start testing?");
+      if (conf) {
+        let numbersSwapped = 0;
+        let comparisonsCount = 0;
+
+        const randomNumbers = Array.from(
+          { length: 30 },
+          () => Math.floor(Math.random() * 100) + 1
+        );
+
+        const sortedArray = insertionSort([...randomNumbers])
+
+        document.write(`
+          <p>Initial array: ${randomNumbers}</p>
+          <p>Sorted array: ${sortedArray}</p>
+          <p>Numbers were swapped ${numbersSwapped} times</p>
+          <p>Numbers were compared ${comparisonsCount} times</p>
+          `);
+
+        function insertionSort(arr) {
+          for (let i = 1; i < arr.length; i++) {
+            let key = arr[i]
+            let j = i - 1;
+            while (j >= 0) {
+              comparisonsCount++
+              if (arr[j] > key) {
+                arr[j + 1] = arr[j]
+                numbersSwapped++
+              } else {
+                break
+              }
+              j--
+            }
+            arr[j + 1] = key;
+          }
+          return arr
+        }
+      }
+    </script>
+  </body>
+</html>

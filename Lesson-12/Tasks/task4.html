@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Sorting Visualization</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <style>
+      table {
+        border-collapse: collapse;
+        margin: 10px 0;
+      }
+      td, th {
+        border: 1px solid black;
+        padding: 5px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Task 4</h1>
+    <p>
+      Для розглянутих методів сортування спробувати вивести етапи сортування
+      шляхом виведення відповідних таблиць за зразком.<br />
+      Тобто кожного разу після обміну елементів вивести поточний стан масиву на
+      екран (стрілки не потрібні).
+    </p>
+    
+    <div id="table-container"></div>
+
+    <script>
+      let conf = confirm("Do you want to start testing?")
+      if (conf) {
+        let numbersSwapped = 0
+        let comparisonsCount = 0
+        const container = document.getElementById("table-container")
+
+        const randomNumbers = Array.from(
+          { length: 5 },
+          () => Math.floor(Math.random() * 100) + 1
+        );
+
+        container.innerHTML += `<p><strong>Initial array:</strong> ${randomNumbers}</p>`
+
+        const arraySortedByInsertion = insertionSort([...randomNumbers], "Insertion Sort")
+        const arraySortedByShaker = shakerSort([...randomNumbers], "Shaker Sort")
+
+        container.innerHTML += `<p><strong>Sorted by insertion:</strong> ${arraySortedByInsertion}</p>`
+        container.innerHTML += `<p><strong>Sorted by shaker:</strong> ${arraySortedByShaker}</p>`
+
+        function updateTable(arr, title) {
+          let tableHTML = `<h3>${title}</h3><table><tr>`
+          arr.forEach(num => {
+            tableHTML += `<td>${num}</td>`
+          });
+          tableHTML += `</tr></table>`
+          container.innerHTML += tableHTML
+        }
+
+        function insertionSort(arr, title) {
+          updateTable(arr, `${title} - Initial`)
+          for (let i = 1; i < arr.length; i++) {
+            let key = arr[i]
+            let j = i - 1;
+            while (j >= 0) {
+              comparisonsCount++
+              if (arr[j] > key) {
+                arr[j + 1] = arr[j]
+                j--;
+                numbersSwapped++
+                updateTable(arr, title)
+              } else {
+                break;
+              }
+            }
+            arr[j + 1] = key;
+          }
+          return arr;
+        }
+
+        function shakerSort(arr, title) {
+          let left = 0, right = arr.length - 1, swapped;
+          updateTable(arr, `${title} - Initial`)
+          do {
+            swapped = false
+            for (let i = left; i < right; i++) {
+              comparisonsCount++
+              if (arr[i] > arr[i + 1]) {
+                [arr[i], arr[i + 1]] = [arr[i + 1], arr[i]];
+                numbersSwapped++
+                swapped = true
+                updateTable(arr, title)
+              }
+            }
+            right--
+
+            for (let i = right; i > left; i--) {
+              comparisonsCount++
+              if (arr[i] < arr[i - 1]) {
+                [arr[i], arr[i - 1]] = [arr[i - 1], arr[i]]
+                numbersSwapped++
+                swapped = true
+                updateTable(arr, title)
+              }
+            }
+            left++
+          } while (swapped)
+          return arr
+        }
+      }
+    </script>
+  </body>
+</html>
