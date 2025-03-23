@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  </head>
+
+  <body>
+    <div id="table-container"></div>
+    <h1>Task 1</h1>
+    <p>
+      Задача 1. Описати масив об’єктів – сайтів розроблених компанією з такими
+      властивостями <br />
+      ----- Властивості ------<br />
+      1)назва компанії на час розробки (назву періодично змінюють)<br />
+      2) власник компанії споснсори (масив спонсорів) <br />
+      * прізвище спонсора <br />
+      * ім’я спонсора <br />
+      * сума вкладень спонсора <br />
+      3)рік випуску<br />
+      4)вартість сайту<br />
+      Знайти:<br />
+      1) загальну вартість усіх сайтів<br />
+      2) кількість сайтів, що було зроблено між 2000 та 2009 рр.<br />
+      3) кількість сайтів, де сума спонсорських вкладень була більшою за 100000<br />
+      4) створити загальний список усіх спонсорів (поки можуть повторюватись, просто зібрати усі у масив)<br />
+      5) знайти рік, коли прибуток був найбільшим<br />
+      6) упорядкувати список за спаданням прибутку<br />
+      7) Створити 2 окремих списки з копіями об’єктів, що містять сайти з вартість до 10000 і більше 10000<br />
+
+    </p>
+    <script>
+      let conf = confirm("Do you want to start testing?");
+      if (conf) {
+        const webSitesArray = [
+          {
+            name: "Boohoo",
+            ovner: "Bill Yotpo",
+            sponsorArray: [
+              {
+                sponsorName: "Moisha",
+                sponsorSername: "Rabinovich",
+                investmentSum: 500000,
+              },
+              {
+                sponsorName: "Izia",
+                sponsorSername: "Catsman",
+                investmentSum: 750000,
+              },
+              {
+                sponsorName: "Sonya",
+                sponsorSername: "Rozenman",
+                investmentSum: 250000,
+              },
+            ],
+            releaseYear: 2021,
+            webSitePrice: 1500000,
+          },
+          {
+            name: "ShopMate",
+            ovner: "Alice Redwood",
+            sponsorArray: [
+              {
+                sponsorName: "John",
+                sponsorSername: "Doe",
+                investmentSum: 1000,
+              },
+              {
+                sponsorName: "Emily",
+                sponsorSername: "Clark",
+                investmentSum: 1000,
+              },
+              {
+                sponsorName: "Michael",
+                sponsorSername: "Smith",
+                investmentSum: 3000,
+              },
+            ],
+            releaseYear: 2009,
+            webSitePrice: 1300,
+          },
+          {
+            name: "Trendify",
+            ovner: "Carlos Mendoza",
+            sponsorArray: [
+              {
+                sponsorName: "Ivan",
+                sponsorSername: "Petrov",
+                investmentSum: 7000,
+              },
+              {
+                sponsorName: "Olga",
+                sponsorSername: "Ivanova",
+                investmentSum: 5000,
+              },
+              {
+                sponsorName: "Sergey",
+                sponsorSername: "Kuznetsov",
+                investmentSum: 4500,
+              },
+            ],
+            releaseYear: 2001,
+            webSitePrice: 6000,
+          },
+          {
+            name: "ClickCart",
+            ovner: "Natalie Brooks",
+            sponsorArray: [
+              {
+                sponsorName: "David",
+                sponsorSername: "Johnson",
+                investmentSum: 800000,
+              },
+              {
+                sponsorName: "Sarah",
+                sponsorSername: "Williams",
+                investmentSum: 550000,
+              },
+              {
+                sponsorName: "Alex",
+                sponsorSername: "Brown",
+                investmentSum: 350000,
+              },
+            ],
+            releaseYear: 2020,
+            webSitePrice: 1400000,
+          },
+          {
+            name: "QuickBuy",
+            ovner: "Robert Chang",
+            sponsorArray: [
+              {
+                sponsorName: "Liam",
+                sponsorSername: "Anderson",
+                investmentSum: 900000,
+              },
+              {
+                sponsorName: "Emma",
+                sponsorSername: "Thompson",
+                investmentSum: 600000,
+              },
+              {
+                sponsorName: "Noah",
+                sponsorSername: "White",
+                investmentSum: 400000,
+              },
+            ],
+            releaseYear: 2018,
+            webSitePrice: 1700000,
+          }
+        ]
+        const totlaWebSitesCost = webSitesArray.reduce((sitePrice, site) => sitePrice + site.webSitePrice, 0)
+        const websitesfrom2000to2009 = webSitesArray.filter((site) => (site.releaseYear>=2000 && site.releaseYear <= 2009))
+        const websitesInvestmentsMore10000 = webSitesArray.filter((site) => site.sponsorArray.reduce((investment, sponsor) =>  investment + sponsor.investmentSum, 0) > 100000)
+        const sponsorsNameArray = webSitesArray.flatMap((site) => site.sponsorArray.map((sponsor) => sponsor.sponsorName))
+        const maxIncomeYear = webSitesArray.find((site) => site.webSitePrice == webSitesArray.reduce((maxPrice, site) => maxPrice < site.webSitePrice ? maxPrice = site.webSitePrice : maxPrice, 0))
+        const sortedByPriceArray = [... webSitesArray].sort((a,b) => b.webSitePrice - a.webSitePrice)
+        const sitesMore10000 = webSitesArray.filter((site) => site.webSitePrice > 10000)
+        const sitesLess10000 = webSitesArray.filter((site) => site.webSitePrice < 10000)
+        document.write(`
+        <p style="font-weight : bold;">загальнa вартість усіх сайтів: ${totlaWebSitesCost}</p>
+        <p style="font-weight : bold;">кількість сайтів, що було зроблено між 2000 та 2009 рр:${websitesfrom2000to2009.length} </p>
+        <p style="font-weight : bold;"> кількість сайтів, де сума спонсорських вкладень була більшою за 100000 ${websitesInvestmentsMore10000.length}</p>
+        <p style="font-weight : bold;"> створити загальний список усіх спонсорів (поки можуть повторюватись, просто зібрати усі у масив): ${sponsorsNameArray}</p>
+        <p style="font-weight : bold;"> рік, коли прибуток був найбільшим: ${maxIncomeYear.releaseYear}</p>
+        <p style="font-weight : bold;"> упорядкувати список за спаданням прибутку: <pre>${JSON.stringify(sortedByPriceArray, null, 2)}</pre></p>
+        <p style="font-weight : bold;">сайти вартість більше 10000: <pre>${JSON.stringify(sitesMore10000, null, 2)}</pre></p>
+        <p style="font-weight : bold;">вартість до 10000 <pre>${JSON.stringify(sitesLess10000, null, 2)}</pre></p>
+        `)
+
+      }
+    </script>
+  </body>
+</html>

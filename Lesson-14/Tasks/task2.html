@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  </head>
+
+  <body>
+    <h1>Task 2</h1>
+    <p>
+      Задача 2. Розробити функцію, у яку передають об’єкт (день, місяць, рік). Визначити, який буде рік через N місяців.
+    </p>
+    <script>
+      let conf = confirm("Do you want to start testing?");
+      if (conf) {
+        const day= parseInt(prompt("Enter day's number from 1 to 30") || 10)
+        const month = parseInt(prompt("Enter month's number from 1 to 12") || 10)
+        const year = parseInt(prompt("Enter year's number from 1 to 2025") || 2025)
+        const monthsNumber = parseInt(prompt("Enter amount of months") || 10)
+
+        const date ={
+          Day:day, 
+          Month:month,
+          Year:year
+        }
+
+        function getYear(date, num){
+          let newMonth = date.Month + num
+          let newYear = date.Year + Math.floor(newMonth/12)
+          return newYear
+        }
+
+        document.write(`
+        <p>current date ${date.Day} ${date.Month} ${date.Year}</p>
+        <p>year after ${monthsNumber} months is ${getYear(date, monthsNumber)}</p>
+        `)
+       
+      }
+    </script>
+  </body>
+</html>
