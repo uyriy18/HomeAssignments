@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  </head>
+
+  <body>
+    <h1>Task 2</h1>
+    <p>Задача 2. Створити об’єкт «Авто».</p>
+    <script>
+      let conf = confirm("Do you want to start testing?");
+      if (conf) {
+        class Auto {
+          constructor(
+            brandInit,
+            tankSizeInit,
+            passangersSeatsInit,
+            passangersAmountInit = 0
+          ) {
+            this.brand = brandInit;
+            this.tankSize = tankSizeInit;
+            this.passangersSeats = passangersSeatsInit;
+            this.passangersAmount = passangersAmountInit;
+          }
+
+          fillTank(liters) {
+            let message;
+            if (liters > this.tankSize) {
+              message = `Auto cannot be filled with ${liters} liters of petrol, your tank can only hold ${this.tankSize} liters.`;
+            } else if (liters < 1) {
+              message = `Please enter a valid amount between 1 and ${this.tankSize} liters.`;
+            } else {
+              message = `Your tank has been filled with ${liters} liters.`;
+            }
+            return message;
+          }
+
+          getPassangersSeats() {
+            return `Your auto can hold ${this.passangersSeats} passenger seats.`;
+          }
+
+          addPassanger() {
+            if (this.passangersAmount >= this.passangersSeats) {
+              return `You cannot add more passengers to your auto.`;
+            }
+            this.passangersAmount++;
+            return `A passenger has been added. Now there are ${
+              this.passangersAmount
+            } passengers, and ${
+              this.passangersSeats - this.passangersAmount
+            } seats are free.`;
+          }
+
+          removePassanger() {
+            if (this.passangersAmount <= 0) {
+              return `There are no passengers left to remove.`;
+            }
+            this.passangersAmount--;
+            return `A passenger has been removed. Now there are ${this.passangersAmount} passengers left.`;
+          }
+
+          toString() {
+            return `${this.brand} with a tank size of ${this.tankSize} liters, ${this.passangersSeats} passenger seats, and currently ${this.passangersAmount} passengers.`;
+          }
+        }
+
+        const Tavria = new Auto("Tavria", 40, 5, 2);
+        const Ford = new Auto("Ford", 60, 6, 1);
+        const Volkswagen = new Auto("Volkswagen", 120, 12, 10);
+
+        document.write(`
+          <p>${Tavria}</p>
+          <p>${Ford}</p>
+          <p>${Volkswagen}</p>
+          <p> fill in the Tavria with 100L ${Tavria.fillTank(100)}</p>
+          <p> fill in the Ford with 10L ${Ford.fillTank(100)}</p>
+          <p> Passanger seats in Volkswagen ${Volkswagen.getPassangersSeats()}</p>
+          <p> Add passanger to Volkswagen ${Volkswagen.addPassanger()}</p>
+          <p> Add passanger to Volkswagen ${Volkswagen.addPassanger()}</p>
+          <p> Add passanger to Volkswagen ${Volkswagen.addPassanger()}</p>
+          <p> Remove passanger from Volkswagen ${Volkswagen.removePassanger()}</p>
+        `);
+      }
+    </script>
+  </body>
+</html>

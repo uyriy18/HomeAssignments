@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  </head>
+
+  <body>
+    <div id="table-container"></div>
+    <h1>Task 1</h1>
+    <p>
+      Задача 1.  Створити об’єкт «Тир». У масиві зберігаються 1, якщо у цьому квадраті є заєць і 0 в іншому випадку. 
+    </p>
+    <script>
+      let conf = confirm("Do you want to start testing?");
+      if (conf) {
+        const shootingGalery = {
+          shootingGaleryArray: ['0','0','0','0','0','0'],
+          harePositionIndex: 0,
+          showHare(){
+            this.harePositionIndex= Math.floor(Math.random() * (this.shootingGaleryArray.length - 1))
+            this.shootingGaleryArray[this.harePositionIndex] = '1'
+            return this.shootingGaleryArray
+          },
+          shoot(){
+            let shootingIndex = parseInt(prompt(`Enter the number from 1 to ${this.shootingGaleryArray.length}`)) - 1
+            let message = ""
+            if (shootingIndex === this.harePositionIndex){
+              this.shootingGaleryArray[shootingIndex] = '#'
+              message = "hare is dead"
+              
+            } else if (shootingIndex < 0 || shootingIndex > this.shootingGaleryArray.length - 1){
+              message = "Be carefull! you can kill yourself next time!!!"
+            }
+            else{
+              this.shootingGaleryArray[shootingIndex] = 'x'
+              message = "You missed"
+            }
+            return `${message} ${this.shootingGaleryArray}`
+          }
+        }
+        document.write(`
+          <p>${shootingGalery.showHare()}</p>
+          <p>${shootingGalery.shoot()}</p>
+
+        `)
+        
+      }
+    </script>
+  </body>
+</html>

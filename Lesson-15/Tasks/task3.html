@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  </head>
+
+  <body>
+    <h1>Task 3</h1>
+    <p>
+      Задача 3. Розробити клас MultChecker для перевірки таблиці множення
+    </p>
+    <script>
+      let conf = confirm("Do you want to start testing?");
+      if (conf) {
+        class MultChecker{
+          constructor(numberInit){
+            this.number = numberInit
+            this.wrongAnswersCount = 0
+            this.rightAnswersCount = 0
+            this.numbersArray = [0,1,2,3,4,5,6,7,8,9,0]  
+            this.randomNumber = 0 
+            this.userAnswer = 0           
+          }
+          generateExample(){
+            this.randomNumber = this.numbersArray[Math.floor(Math.random() * this.numbersArray.length)]
+            this.userAnswer = parseInt(prompt(`${this.number} x ${this.randomNumber} = ?`)) 
+            return `${this.number} x ${this.randomNumber} = ${this.userAnswer}`     
+          }
+          checkResult(){
+            let message
+            if(this.userAnswer === this.number * this.randomNumber){
+              message = `Correct! ${this.number} x ${this.randomNumber} = ${this.userAnswer}`
+              this.rightAnswersCount++
+            }
+            else{
+              message = `Wrong! ${this.number} x ${this.randomNumber} = ${this.number * this.randomNumber}`
+              this.wrongAnswersCount++
+            }    
+            return message     
+          }
+          render(){
+            return `Correct answers- ${obj1.rightAnswersCount}, wrong answers- ${obj1.wrongAnswersCount}`
+          }
+        }
+        const obj1 = new MultChecker(5)
+        let repeat = true
+        do{
+          document.write(`
+          <p>${obj1.generateExample()}</p>
+          <p>${obj1.checkResult()}</p>
+          <p>${obj1.render()}</p>
+        `)
+        repeat = confirm("Do you want to continue?")
+        }
+        while (repeat)
+
+       
+
+      }
+    </script>
+  </body>
+</html>

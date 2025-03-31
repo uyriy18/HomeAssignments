@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Розробити клас Baner</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  </head>
+
+  <body>
+    <h1>Розробити клас Baner</h1>
+    <p>Click the button to load a random icon.</p>
+
+    <img id="randomIcon" src="" alt="Random Icon" width="100" />
+
+    <br /><br />
+   
+    <script>
+      let conf = confirm("Do you want to start testing?");
+      if (conf) {
+        class Banner {
+          constructor() {
+            this.icons = [
+              {
+                image_name: "Yarn Icon",
+                image_link: "https://cdn.simpleicons.org/yarn",
+              },
+              {
+                image_name: "React Icon",
+                image_link: "https://cdn.simpleicons.org/react",
+              },
+              {
+                image_name: "Git Icon",
+                image_link: "https://cdn.simpleicons.org/git",
+              },
+            ];
+            this.randomImageIndex = 0;
+          }
+
+          selectRandomImage() {
+            this.randomImageIndex = Math.floor(
+              Math.random() * this.icons.length
+            );
+          }
+
+          showImage() {
+            const imgElement = document.getElementById("randomIcon");
+
+            if (imgElement) {
+              imgElement.src = this.icons[this.randomImageIndex].image_link;
+              imgElement.alt = this.icons[this.randomImageIndex].image_name;
+            } else {
+              console.error("Image element not found!");
+            }
+          }
+        }
+
+        const obj1 = new Banner();
+        obj1.selectRandomImage();
+        window.addEventListener("load", () => obj1.showImage());
+      }
+    </script>
+  </body>
+</html>

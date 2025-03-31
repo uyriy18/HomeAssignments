@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  </head>
+
+  <body>
+    <div id="table-container"></div>
+    <h1>Task 1</h1>
+    <p>
+      Задача 0.   Дано два об’єкта. Обидва містять масив цілих чисел.</br> 
+      При цьому у одному з них є функція знаходження суми, а у іншому – функція для знаходження добутку тих, які знаходяться між заданими мінімальним і максимальних значенням.</br> 
+      Використати обидва методи стосовно обидвох об’єктів (використати call, apply)
+    </p>
+    <script>
+      let conf = confirm("Do you want to start testing?");
+      if (conf) {
+        const obj1 = {
+          array: [162, 52, 84, 5, 83, 92, 4, 6, 23, 5, 44, 34],
+
+           getSum() {    
+            return this.array.reduce((prevSum, el) => prevSum + el, 0)            
+          }
+        }
+
+        const obj2 = {
+          array: [6, 5, 4, 5, 83, 12, 4, 6, 2, 4, 4],
+
+          getProductBetweenMinAndMax(){
+            let min = this.array.reduce((prevEl, el) => prevEl > el ? prevEl = el : prevEl)
+            let max = this.array.reduce((prevEl, el) => prevEl < el ? prevEl = el : prevEl)
+            let minIndex = this.array.indexOf(min)
+            let maxIndex = this.array.indexOf(max)
+            if(minIndex > maxIndex){
+              let temp
+              temp = minIndex
+              minIndex = maxIndex
+              maxIndex = temp
+            }
+            let newArray = this.array.slice(minIndex + 1, maxIndex)
+            return newArray.reduce((prevProduct, el) => prevProduct * el, 1)
+          }
+        }
+
+        document.write(`
+          <p> call getSum for the second object ${obj1.getSum.call(obj2)}</p>
+          <p> apply getSum for the second object ${obj1.getSum.apply(obj2)}</p>
+          <p> call getProductBetweenMinAndMax for the first object ${obj2.getProductBetweenMinAndMax.call(obj1)}</p>
+          <p> apply getProductBetweenMinAndMax for the first object ${obj2.getProductBetweenMinAndMax.apply(obj1)}</p>
+
+        `)
+        
+      }
+    </script>
+  </body>
+</html>

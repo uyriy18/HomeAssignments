@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  </head>
+
+  <body>
+    <h1>Task 5</h1>
+    <p>Задача 5. Розробити клас «Керівник танців»</p>
+    <script>
+      let conf = confirm("Do you want to start testing?");
+      if (conf) {
+        const menNames = [
+          "Alexander",
+          "Michael",
+          "Daniel",
+          "Christopher",
+          "Matthew",
+        ];
+        const womenNames = [
+          "Sophia",
+          "Olivia",
+          "Isabella",
+          "Emily",
+          "Charlotte",
+        ];
+
+        class DanceDirector {
+          constructor(boysInit, girlsInit) {
+            this.boysNames = boysInit;
+            this.girlsNames = girlsInit;
+            this.boyName;
+            this.girlName;
+            this.intervalId = null;
+          }
+
+          getRandomBoyName() {
+            if (this.boysNames.length === 0) return null;
+            const randIndex = Math.floor(Math.random() * this.boysNames.length);
+            this.boyName = this.boysNames.splice(randIndex, 1)[0];
+            return this.boyName;
+          }
+
+          getRandomGirlName() {
+            if (this.girlsNames.length === 0) return null;
+            const randIndex = Math.floor(
+              Math.random() * this.girlsNames.length
+            );
+            this.girlName = this.girlsNames.splice(randIndex, 1)[0];
+            return this.girlName;
+          }
+
+          createPair() {
+            const boy = this.getRandomBoyName();
+            const girl = this.getRandomGirlName();
+            let message;
+            if (!boy || !girl) {
+              clearInterval(this.intervalId);
+              message = "All peaople are paired";
+            } else {
+              message = `${this.girlName} + ${this.boyName}`;
+            }
+            return message;
+          }
+
+          run() {
+            this.intervalId = setInterval(() => {
+              document.write(`
+              <p>${this.createPair()}</p>
+              `);
+            }, 5000);
+          }
+        }
+        const obj1 = new DanceDirector(menNames, womenNames);
+        obj1.run();
+      }
+    </script>
+  </body>
+</html>
