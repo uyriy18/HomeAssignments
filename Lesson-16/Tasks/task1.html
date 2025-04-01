@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Document</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+</head>
+
+<body>
+  <div id="table-container"></div>
+  <h1>Task 1</h1>
+  <p>
+    Задача 1. Створити клас TDate для роботи із датами у форматі “день.місяць.рік”. Дата представляється структурою із
+    трьома полями. </br>
+    Реалізувати методи збільшення/зменшення дати на певну кількість днів, місяців чи років. Введення та виведення дати
+    реалізувати за допомогою методу toString. </br>
+  </p>
+  <script>
+    let conf = confirm("Do you want to start testing?");
+    if (conf) {
+      class TDate {
+        #dayNum
+        #monthNum
+        #yearNum
+        #targetDate
+        constructor(newDay, newMonth, newYear) {
+          this.#dayNum = new Date().getDay();
+          this.#monthNum = new Date().getMonth();
+          this.#yearNum = new Date().getFullYear();
+          this.newDay = newDay;
+          this.newMonth = newMonth;
+          this.newYear = newYear;
+        }
+
+        getFutureDate(futureDay = 0, futureMonth = 0, futureYear = 0) {
+          const startDate = new Date(this.#yearNum, this.#monthNum, this.#dayNum)
+          const difDate = new Date(futureYear, futureMonth, futureDay)
+          this.#targetDate = startDate + difDate
+          return this.#targetDate
+        }
+        getPastDate(pastDay = 0, pastMonth = 0, pastYear = 0) {
+          const startDate = newDate(this.#yearNum, this.#monthNum, this.#dayNum)
+          const difDate = new Date(pastYear, pastMonth, pastDay)
+          this.#targetDate = startDate - difDate
+          return this.#targetDate
+        }
+
+
+        toString() {
+          return `${this.#targetDate}`
+        }
+      }
+
+      const obj1 = new TDate(12, 5, 100)
+      obj1.getFutureDate()
+      document.write(`
+        future date - ${obj1}
+        `)
+
+    }
+  </script>
+</body>
+
+</html>

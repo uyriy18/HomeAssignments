@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Document</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+</head>
+
+<body>
+  <h1>Task 2</h1>
+  <p>Задача 2. Створити клас TMoney для роботи з грошовими сумами. Сума повинна зберігатися у вигляді доларового
+    еквіваленту. </br>
+    Реалізувати методи додавання/вилучення грошової маси, вказуючи необхідну суму у гривнях, та визначення курсу долара,
+    при якому сума у гривнях збільшиться на 100. Курс долара зберігати в окремому полі. </br> </p>
+  <script>
+    let conf = confirm("Do you want to start testing?");
+    if (conf) {
+      class TMoney {
+        constructor(dollarSumInit) {
+          this.#dollarCourse = 41.10
+          this.#dollarSum = 500
+        }
+        #dollarCourse
+        #dollarSum
+
+        get HrivnaSum() {          
+          return parseFloat((this.#dollarSum * this.#dollarCourse).toFixed(2))
+        }
+        addBalance(sum) {
+          const convertedSum = parseFloat((sum / this.#dollarCourse).toFixed(2))
+          if (sum < 0) {
+            throw new Error(`Invalid value. Sum must be > 0`)
+          }
+          else if (convertedSum < 100) {
+            throw new Error(`The minimum deposite sume shouldn't be less than 100$ Please add ${(100 * this.#dollarCourse) - sum} to reach the threshold`);
+          }
+          else {
+            this.#dollarSum += convertedSum
+            return `your balance is ${this.DollarSum}`
+          }
+        }
+
+        removeBalance(sum) {
+          const convertedSum = (sum / this.#dollarCourse).toFixed(2)
+          if (sum < 0) {
+            throw new Error(`Invalid value. Sum must be > 0`)
+          }
+          else if (convertedSum < 100) {
+            throw new Error(`The minimum deposite sume shouldn't be less than 100$ Please add ${(100 * this.#dollarCourse) - sum}hrn to reach the threshold`);
+          }
+          else if(convertedSum > this.#dollarSum){
+            throw new Error(`Not enough money on the your account`);
+          }
+          else {
+            this.#dollarSum = this.#dollarSum - convertedSum
+            return `your balance is ${this.DollarSum}`
+          }
+        }
+        getCourseTo100(){
+          return `To have an additional 100 hrn course should be ${((this.HrivnaSum + 100)/this.#dollarSum).toFixed(2)}`
+        }
+        get DollarSum() {
+          return this.#dollarSum
+        }
+        toString(){
+          return `Course : ${this.#dollarCourse}, dollar sume : ${this.DollarSum}, Hrivna sum : ${this.HrivnaSum}, ${this.getCourseTo100()}`
+        }
+      }
+      const obj1 = new TMoney()
+      try{
+        document.write(`
+         <p>${obj1}</p> 
+         <p>${obj1.addBalance(5000)}</p>
+         <p>${obj1}</p>
+         <p>${obj1.removeBalance(4200)}</p>
+      `)
+      }
+      catch(error){
+        document.write(error)
+      }
+    }
+  </script>
+</body>
+
+</html>

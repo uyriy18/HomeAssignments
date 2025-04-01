@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  </head>
+
+  <body>
+    <h1>Task 3</h1>
+    <p>Задача 3. Об’єкт “Фірма” (використати члени-класи)</p>
+    <script>
+      let conf = confirm("Do you want to start testing?");
+      if (conf) {
+        class Firm {
+          constructor() {}
+          #firmName;
+          get FirmName() {
+            return this.#firmName;
+          }
+          set FirmName(nameInit) {
+            if (Array.from(nameInit).length < 2) {
+              throw new Error`Name must be at least 2 symbols length`();
+            } else {
+              this.#firmName = nameInit;
+            }
+          }
+          #foundationDate;
+
+          get FoundationDate() {
+            return this.#foundationDate
+              ? `${this.#foundationDate.toLocaleString("default", {
+                  month: "long",
+                })}, ${this.#foundationDate.getFullYear()}`
+              : "Not set";
+          }
+          set FoundationDate(date) {
+            if (!(date instanceof Date) || isNaN(date)) {
+              throw new Error(
+                "Invalid date. Please provide a valid Date object."
+              );
+            }
+            this.#foundationDate = date;
+          }
+          #services;
+          get Services() {
+            return `${this.#services.serviceName}, ${
+              this.#services.serviceCost
+            }, ${this.#services.serviceTerm}`;
+          }
+          set Services({ name, cost, term }) {
+            if (!name || !cost || !term) {
+              throw new Error(`Enter all mandatory values!`);
+            } else {
+              this.#services = {
+                serviceName: name,
+                serviceCost: cost,
+                serviceTerm: term,
+              };
+            }
+          }
+
+          #address;
+          get Address() {
+            return `${this.#address.country}, ${this.#address.city}, ${
+              this.#address.street
+            }, ${this.#address.houseNumber}`;
+          }
+          set Address({ countryInit, cityInit, streetInit, houseNumberInit }) {
+            if (Array.from(streetInit).length < 3) {
+              throw new Error`Street must be at least 3 symbols length`();
+            } else if (!countryInit || !cityInit || !houseNumberInit) {
+              throw new Error(`Enter all mandatory values!`);
+            } else {
+              this.#address = {
+                country: countryInit,
+                city: cityInit,
+                street: streetInit,
+                houseNumber: houseNumberInit,
+              };
+            }
+          }
+          toString() {
+            return `{${this.FirmName}, ${this.FoundationDate}, ${this.Address}, ${this.Services}`;
+          }
+        }
+        const firm1 = new Firm();
+        firm1.FirmName = "ABB company";
+        firm1.FoundationDate = new Date(2024, 3);
+        firm1.Address = {
+          countryInit: "Ukraine",
+          cityInit: "Chernihiv",
+          streetInit: "Martyna Nebaby",
+          houseNumberInit: 25,
+        };
+        firm1.Services = {
+          name: "Software developmrnt",
+          cost: 150000,
+          term: 30,
+        };
+        document.write(firm1);
+      }
+    </script>
+  </body>
+</html>
