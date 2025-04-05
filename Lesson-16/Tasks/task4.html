@@ -1,24 +1,132 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Document</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  </head>
 
-  <body>
-    <h1>Task 4</h1>
-    <p>
-      Задача 4. Створити клас TBankomat, який моделює роботу банкомата. Клас повинен містити поля для зберігання кількості купюр кожного із номіналів від 5 до 200 гривень. </br>
-      Реалізувати методи знаходження максимальної та мінімальної сум, які може видати банкомат, та метод зняття деякої суми. </br>
-    </p>
-    <script>
-      let conf = confirm("Do you want to start testing?");
-      if (conf) {
-        
+<head>
+  <title>Document</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+</head>
 
+<body>
+  <h1>Task 4</h1>
+  <p>
+    Задача 4. Створити клас TBankomat, який моделює роботу банкомата. Клас повинен містити поля для зберігання кількості
+    купюр кожного із номіналів від 5 до 200 гривень. </br>
+    Реалізувати методи знаходження максимальної та мінімальної сум, які може видати банкомат, та метод зняття деякої
+    суми. </br>
+  </p>
+  <script>
+    let conf = confirm("Do you want to start testing?");
+    if (conf) {
+      class Bill {
+        constructor(nominal, amount) {
+          this.nominal = nominal,
+            this.amount = amount
+        }
       }
-    </script>
-  </body>
+      class TBankomat {
+        #billArray;
+        constructor() {
+          this.#billArray = [];
+        }
+        get TotalSum() {
+          let arraySum = 0
+          this.#billArray.forEach(bill => {
+            arraySum += bill.amount * bill.nominal
+          });
+          return arraySum
+        }
+        get BillArrayNominals() {
+          let arrayNominals = []
+          this.#billArray.forEach(bill => {
+            arrayNominals.push(bill.nominal)
+          });
+          return arrayNominals
+        }
+
+        get MinBill() {
+          let minBill = this.#billArray[0].nominal
+          this.#billArray.forEach(bill => {
+            minBill > bill.nominal ? minBill = bill.nominal : null
+          });
+          return minBill
+        }
+        getCash(amount) {
+          if (amount % this.MinBill !== 0) {
+            throw new Error(`The amount must be a multiple of ${this.MinBill}`);
+          }
+          if (amount > this.TotalSum) {
+            throw new Error("The ATM does not have enough money.");
+          }
+
+          let remainingAmount = amount;
+          let billsToDispense = {};
+
+          
+          const sortedBills = [...this.#billArray].sort((a, b) => b.nominal - a.nominal);
+
+          for (let bill of sortedBills) {
+            const maxBills = Math.floor(remainingAmount / bill.nominal);
+            const billsUsed = Math.min(maxBills, bill.amount); 
+            if (billsUsed > 0) {
+              billsToDispense[bill.nominal] = billsUsed;
+              remainingAmount -= billsUsed * bill.nominal;
+              bill.amount -= billsUsed; 
+            }
+          }
+
+          if (remainingAmount > 0) {
+            throw new Error("The ATM cannot dispense the exact amount with the available bills.");
+          }
+
+          let finalMessage = `Sum: ${amount}, `;
+          for (const [nominal, qty] of Object.entries(billsToDispense)) {
+            finalMessage += `nominal : ${nominal}, qty : ${qty}; `;
+          }
+
+          return finalMessage;
+        }
+
+
+
+
+        set BillArray(bill) {
+          if (bill.nominal !== 5 && bill.nominal !== 10 && bill.nominal !== 20 && bill.nominal !== 50 && bill.nominal !== 100 && bill.nominal !== 200) {
+            throw new Error(`Alowed bill nominals: 50, 100, 200`)
+          } else if (bill.amount < 1) {
+            throw new Error(`Amount cannot be < 1`)
+          } else {
+            this.#billArray.push(bill)
+          }
+        }
+      }
+      const tbank = new TBankomat
+      tbank.BillArray = new Bill(5, 82)
+      tbank.BillArray = new Bill(10, 152)
+      tbank.BillArray = new Bill(20, 12)
+      tbank.BillArray = new Bill(50, 100)
+      tbank.BillArray = new Bill(100, 35)
+      tbank.BillArray = new Bill(200, 25)  
+      const p1 = document.createElement("p")
+      const p2 = document.createElement("p")
+      const p3 = document.createElement("p")
+      const p4 = document.createElement("p")
+      const div = document.createElement("div")
+      p1.textContent = tbank.TotalSum
+      const requiredSum = tbank.getCash(2250)
+      p2.textContent = tbank.BillArrayNominals
+      p3.textContent = tbank.MinBill
+      div.textContent = requiredSum
+      p4.textContent = tbank.TotalSum
+      document.body.appendChild(p1)
+      document.body.appendChild(p2)
+      document.body.appendChild(p3)
+      document.body.appendChild(div)
+      document.body.appendChild(p4)
+
+    }
+  </script>
+</body>
+
 </html>

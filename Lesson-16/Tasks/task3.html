@@ -49,16 +49,18 @@
               this.#services.serviceCost
             }, ${this.#services.serviceTerm}`;
           }
-          set Services({ name, cost, term }) {
-            if (!name || !cost || !term) {
-              throw new Error(`Enter all mandatory values!`);
-            } else {
-              this.#services = {
-                serviceName: name,
-                serviceCost: cost,
-                serviceTerm: term,
-              };
+          set Services(service) {
+            if (!(service instanceof FirmServices)) {
+              throw new Error("Services must be an instance of FirmServices.");
             }
+            if (!service.nameInit || !service.costInit || !service.termInit) {
+              throw new Error("Enter all mandatory values!");
+            }
+            this.#services = {
+              serviceName: service.nameInit,
+              serviceCost: service.costInit,
+              serviceTerm: service.termInit,
+            };
           }
 
           #address;
@@ -67,11 +69,13 @@
               this.#address.street
             }, ${this.#address.houseNumber}`;
           }
-          set Address({ countryInit, cityInit, streetInit, houseNumberInit }) {
-            if (Array.from(streetInit).length < 3) {
-              throw new Error`Street must be at least 3 symbols length`();
+          set Address(address) {
+            const { countryInit, cityInit, streetInit, houseNumberInit } =
+              address;
+            if (!streetInit || streetInit.length < 3) {
+              throw new Error("Street must be at least 3 symbols length.");
             } else if (!countryInit || !cityInit || !houseNumberInit) {
-              throw new Error(`Enter all mandatory values!`);
+              throw new Error("Enter all mandatory values!");
             } else {
               this.#address = {
                 country: countryInit,
@@ -81,25 +85,151 @@
               };
             }
           }
+          getFirmAge() {
+            if (!this.#foundationDate) {
+              throw new Error("Foundation date is not set.");
+            }
+
+            const now = new Date();
+            const foundationDate = this.#foundationDate;
+            let years = now.getFullYear() - foundationDate.getFullYear();
+            let months = now.getMonth() - foundationDate.getMonth();
+            let days = now.getDate() - foundationDate.getDate();
+            if (months < 0) {
+              years -= 1;
+              months += 12;
+            }
+            if (days < 0) {
+              months -= 1;
+              const previousMonth = new Date(
+                now.getFullYear(),
+                now.getMonth(),
+                0
+              );
+              days += previousMonth.getDate();
+            }
+            return `${years} years, ${months} months, ${days} days`;
+          }
+
+          static getFiliasInOneCity(arr, city) {
+            let newArr = arr.filter((firm) => {
+              const [country, firmCity] = firm.Address.split(", ");
+              return firmCity === city;
+            });
+            return newArr;
+          }
+          static getServicesByCost(arr, cost) {
+            let newArr = arr.filter((firm) => {
+              const [name, serviceCost]= firm.Services.split(", ");
+              return serviceCost <= cost;
+            });
+            return newArr;
+          }
+
           toString() {
-            return `{${this.FirmName}, ${this.FoundationDate}, ${this.Address}, ${this.Services}`;
+            return `${this.FirmName}, ${this.FoundationDate}, ${this.Address}, ${this.Services}`;
+          }
+        }
+        class FirmAddress {
+          constructor(countryInit, cityInit, streetInit, houseNumberInit) {
+            (this.countryInit = countryInit),
+              (this.cityInit = cityInit),
+              (this.streetInit = streetInit),
+              (this.houseNumberInit = houseNumberInit);
+          }
+        }
+        class FirmServices {
+          constructor(nameInit, costInit, termInit) {
+            (this.nameInit = nameInit),
+              (this.costInit = costInit),
+              (this.termInit = termInit);
           }
         }
         const firm1 = new Firm();
+        const address1 = new FirmAddress(
+          "Ukraine",
+          "Chernihiv",
+          "Martyna Nebaby",
+          25
+        );
+        const services1 = new FirmServices("Software Development", 150000, 30);
         firm1.FirmName = "ABB company";
-        firm1.FoundationDate = new Date(2024, 3);
-        firm1.Address = {
-          countryInit: "Ukraine",
-          cityInit: "Chernihiv",
-          streetInit: "Martyna Nebaby",
-          houseNumberInit: 25,
-        };
-        firm1.Services = {
-          name: "Software developmrnt",
-          cost: 150000,
-          term: 30,
-        };
-        document.write(firm1);
+        firm1.FoundationDate = new Date(2022, 3);
+        firm1.Address = address1;
+        firm1.Services = services1;
+
+        const firm2 = new Firm();
+        const address2 = new FirmAddress(
+          "Ukraine",
+          "Chernihiv",
+          "Shevchenka",
+          10
+        );
+        const services2 = new FirmServices("Web Development", 120000, 25);
+        firm2.FirmName = "ABB company";
+        firm2.FoundationDate = new Date(2021, 5);
+        firm2.Address = address2;
+        firm2.Services = services2;
+
+        const firm3 = new Firm();
+        const address3 = new FirmAddress(
+          "Ukraine",
+          "Chernihiv",
+          "Peremohy",
+          15
+        );
+        const services3 = new FirmServices(
+          "Mobile App Development",
+          200000,
+          40
+        );
+        firm3.FirmName = "ABB company";
+        firm3.FoundationDate = new Date(2020, 8);
+        firm3.Address = address3;
+        firm3.Services = services3;
+
+        const firm4 = new Firm();
+        const address4 = new FirmAddress("Ukraine", "Kyiv", "Khreshchatyk", 1);
+        const services4 = new FirmServices("Cloud Solutions", 30000, 50);
+        firm4.FirmName = "ABB company";
+        firm4.FoundationDate = new Date(2019, 2);
+        firm4.Address = address4;
+        firm4.Services = services4;
+
+        const firm5 = new Firm();
+        const address5 = new FirmAddress("Ukraine", "Lviv", "Halytska", 20);
+        const services5 = new FirmServices("Cybersecurity", 250000, 35);
+        firm5.FirmName = "ABB company";
+        firm5.FoundationDate = new Date(2018, 6);
+        firm5.Address = address5;
+        firm5.Services = services5;
+
+        const firm6 = new Firm();
+        const address6 = new FirmAddress("Ukraine", "Odesa", "Deribasivska", 5);
+        const services6 = new FirmServices("AI Solutions", 400000, 60);
+        firm6.FirmName = "ABB company";
+        firm6.FoundationDate = new Date(2017, 10);
+        firm6.Address = address6;
+        firm6.Services = services6;
+
+        const firmArray = [firm1, firm2, firm3, firm4, firm5, firm6];
+
+        document.write(`
+          <p>${firm1}</p>
+          <p>${firm1.getFirmAge()}</p>
+          <p>${firm2}</p>
+          <p>${firm2.getFirmAge()}</p>
+          <p>${firm3}</p>
+          <p>${firm3.getFirmAge()}</p>
+          <p>${firm4}</p>
+          <p>${firm4.getFirmAge()}</p>
+          <p>${firm5}</p>
+          <p>${firm5.getFirmAge()}</p>
+          <p>${firm6}</p>
+          <p>${firm6.getFirmAge()}</p>
+          <p>${Firm.getFiliasInOneCity(firmArray, "Chernihiv")}</p>
+          <p>${Firm.getServicesByCost(firmArray, 200000)}</p>
+         `);
       }
     </script>
   </body>

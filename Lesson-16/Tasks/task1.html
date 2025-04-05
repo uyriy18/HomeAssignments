@@ -21,45 +21,129 @@
     let conf = confirm("Do you want to start testing?");
     if (conf) {
       class TDate {
-        #dayNum
-        #monthNum
+
+
         #yearNum
-        #targetDate
-        constructor(newDay, newMonth, newYear) {
-          this.#dayNum = new Date().getDay();
-          this.#monthNum = new Date().getMonth();
-          this.#yearNum = new Date().getFullYear();
-          this.newDay = newDay;
-          this.newMonth = newMonth;
-          this.newYear = newYear;
+
+        constructor() {
+
+          this.monthsArray = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+
+        }
+        #day
+        get Day() {
+          return this.#day
         }
 
-        getFutureDate(futureDay = 0, futureMonth = 0, futureYear = 0) {
-          const startDate = new Date(this.#yearNum, this.#monthNum, this.#dayNum)
-          const difDate = new Date(futureYear, futureMonth, futureDay)
-          this.#targetDate = startDate + difDate
-          return this.#targetDate
+        set Day(dayNum) {
+          if (dayNum < 1 || dayNum > 31) {
+            throw new Error(`Day cannot be laa 1 or more 31`)
+          } else {
+            this.#day = dayNum
+          }
         }
-        getPastDate(pastDay = 0, pastMonth = 0, pastYear = 0) {
-          const startDate = newDate(this.#yearNum, this.#monthNum, this.#dayNum)
-          const difDate = new Date(pastYear, pastMonth, pastDay)
-          this.#targetDate = startDate - difDate
-          return this.#targetDate
+        #month
+        get Month() {
+          return this.#month
+        }
+        set Month(monthNum) {
+          if (monthNum < 1 || monthNum > 12) {
+            throw new Error(`Month cannot be less than 1 and more than 12`)
+          } else {
+            this.#month = monthNum
+          }
+        }
+        #year
+        get Year() {
+          return this.#year
+        }
+        set Year(yearNum) {
+          if (yearNum === isNaN) {
+            throw new Error(`Year should be a number`)
+          } else if (yearNum < 0) {
+            throw new Error(`Year should be positive`)
+          } else {
+            this.#year = yearNum
+          }
+        }
+
+        increaseDay(dayNum) {
+          while (dayNum > this.monthsArray[this.#month - 1]) {
+            if (dayNum > this.monthsArray[this.#month - 1]) {
+              dayNum -= this.monthsArray[this.#month - 1]
+              this.increaseMonth(1)
+              this.#day = this.monthsArray[this.#month - 1];
+            } else {
+              this.#day = dayNum
+            }
+          }
+
+        }
+        decreaseDay(dayNum) {
+          while (dayNum > 0) {
+            if (dayNum >= this.#day) {
+              dayNum -= this.#day;
+              this.decreaseMonth(1);
+              this.#day = this.monthsArray[this.#month - 1];
+            } else {
+              this.#day -= dayNum;
+              dayNum = 0;
+            }
+          }
+        }
+        increaseMonth(monthNum) {
+          while (monthNum > 0) {
+            if (monthNum + this.#month > 12) {
+              monthNum -= (12 - this.#month + 1);
+              this.#month = 1;
+              this.#year++;
+            } else {
+              this.#month += monthNum;
+              monthNum = 0;
+            }
+          }
+        }
+        decreaseMonth(monthNum) {
+          while (monthNum > 0) {
+            if (this.#month - monthNum <= 0) {
+              monthNum -= this.#month;
+              this.#month = 12;
+              this.#year--;
+            } else {
+              this.#month -= monthNum;
+              monthNum = 0;
+            }
+          }
+        }
+        increaseYear(yearNum){
+          this.#year += yearNum
+        }
+        decreaseYear(){
+          this.#year -= yearNum
         }
 
 
         toString() {
-          return `${this.#targetDate}`
+          return `${this.Day} ${this.Month} ${this.Year}`
         }
       }
 
-      const obj1 = new TDate(12, 5, 100)
-      obj1.getFutureDate()
-      document.write(`
-        future date - ${obj1}
-        `)
-
+      const obj1 = new TDate();
+      obj1.Day = 12;
+      obj1.Month = 10
+      obj1.Year = 1200
+      console.log(obj1.toString());
+      obj1.increaseDay(135);
+      console.log(`Increase day: ${obj1.toString()}`);
+      obj1.decreaseDay(366);
+      console.log(`Decrease day: ${obj1.toString()}`);
+      obj1.decreaseMonth(19);
+      console.log(`Decrease month: ${obj1.toString()}`);
     }
+
+
+
+
   </script>
 </body>
 
