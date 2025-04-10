@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  </head>
+
+  <body>
+    <h1>Task 4</h1>
+    <p>
+      Задача 4. Склад. База товарів, які зберігаються на складі: назва товару,
+      одиниця виміру, кількість, фірма виробник (назва, реєстраційний номер).
+      Організувати реєстрацію/відвантаження товарів, фільтрація за назвою
+      товару, фільтрація за назвою фірми
+    </p>
+    <script>
+      let conf = confirm("Do you want to start testing?");
+      if (conf) {
+        class Product {
+          #mesureArray;
+          constructor(name, id) {
+            this.#mesureArray = ["kg", "L", "item"];
+            this.manufactorer = new Manufactorer(name, id);
+          }
+
+          #productName;
+          get ProductName() {
+            return `${this.#productName}`;
+          }
+          set ProductName(name) {
+            if (name === "") {
+              throw new Error(`Name cannot be empty`);
+            } else {
+              this.#productName = name;
+            }
+          }
+          #mesure;
+          get Mesure() {
+            return `${this.#mesure}`;
+          }
+          set Mesure(mesureInit) {
+            if (!this.#mesureArray.some((mesure) => mesure === mesureInit)) {
+              throw new Error(`The possible values are: kg, L, item`);
+            } else {
+              this.#mesure = mesureInit;
+            }
+          }
+
+          #qty = 0;
+          get Qty() {
+            return this.#qty;
+          }
+          set Qty(quantity) {
+            if (quantity < 0) {
+              throw new Error(`Quantity must be greater than or equal to 0`);
+            } else {
+              this.#qty = quantity;
+            }
+          }
+
+          toString() {
+            return `Product Name: ${this.ProductName}, Mesure: ${this.Mesure}, Quantity: ${this.Qty}, ${this.manufactorer}`;
+          }
+        }
+
+        class Manufactorer {
+          constructor(name, id) {
+            this.name = name;
+            this.id = id;
+          }
+          toString() {
+            return `Manufactorer: ${this.name}, ID: ${this.id}`;
+          }
+        }
+        class Storage {
+          constructor() {
+            this.productsList = [];
+          }
+          #title;
+          get Title() {
+            return `${this.#title}`;
+          }
+          set Title(newTitle) {
+            if (newTitle === "") {
+              throw new Error(`Title cannot be empty`);
+            } else {
+              this.title = newTitle;
+            }
+          }
+
+          addProduct(newProduct) {
+            if (
+              this.productsList.some(
+                (product) => product.ProductName === newProduct.ProductName
+              )
+            ) {
+              let existingProduct = this.productsList.find(
+                (product) => product.name === newProduct.name
+              );
+              existingProduct.Qty += newProduct.Qty;
+              return;
+            } else {
+              this.productsList.push(newProduct);
+            }
+          }
+
+          shipProduct(shipmentProduct, qty) {
+            if (
+              !this.productsList.some(
+                (product) => product.ProductName === shipmentProduct.ProductName
+              )
+            ) {
+              throw new Error(
+                `There is no ${shipmentProduct.ProductName} in the store`
+              );
+            } else {
+              let existingProduct = this.productsList.find(
+                (product) => product.name === shipmentProduct.name
+              );
+              if (existingProduct.Qty < qty) {
+                throw new Error(`Only ${existingProduct.Qty} can be shipped`);
+              } else {
+                existingProduct.Qty -= qty;
+              }
+            }
+          }
+          getByName(productName) {
+            let filteredArray = this.productsList.filter(
+              (product) => product.ProductName === productName
+            );
+            if (filteredArray.length === 0) {
+              throw new Error(`There are no products with ${productName} name`);
+            } else {
+              return filteredArray;
+            }
+          }
+
+          getByManufactorerName(manufactorerName){
+            let filteredArray = this.productsList.filter(
+              (product) => product.manufactorer.name === manufactorerName
+            );
+            if (filteredArray.length === 0) {
+              throw new Error(`There are no products with ${manufactorerName} manufactorer`);
+            } else {
+              return filteredArray;
+            }
+          }
+
+          toString() {
+            let count = 1;
+            for (const produt of this.productsList) {
+              return `${product} - ${count++}`;
+            }
+          }
+        }
+
+        const product1 = new Product("DairyCo", "12345");
+        product1.ProductName = "Milk";
+        product1.Mesure = "L";
+        product1.Qty = 50;
+
+        const product2 = new Product("SweetCo", "67890");
+        product2.ProductName = "Sugar";
+        product2.Mesure = "kg";
+        product2.Qty = 100;
+
+        const product3 = new Product("StationeryCo", "11223");
+        product3.ProductName = "Notebook";
+        product3.Mesure = "item";
+        product3.Qty = 200;
+
+        const storage = new Storage();
+        storage.Title = "Nova sklad";
+        storage.addProduct(product1);
+        storage.addProduct(product1);
+        storage.addProduct(product2);
+        storage.addProduct(product3);
+        storage.shipProduct(product1, 10);
+
+        console.log(storage.getByName("Milk"));
+        console.log(storage.getByManufactorerName("StationeryCo"));
+        console.log(storage);
+      }
+    </script>
+  </body>
+</html>

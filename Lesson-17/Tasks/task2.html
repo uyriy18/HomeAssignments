@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  </head>
+
+  <body>
+    <h1>Task 2</h1>
+    <p>
+      Задача 2. Задача 2. Створити службове авто (водій, марка, номер). Створити
+      клас таким чином, щоб можна було створити тільки один екземпляр цього
+      класу.
+    </p>
+    <script>
+      let conf = confirm("Do you want to start testing?");
+      if (conf) {
+        class Auto {
+          static autoRef;
+
+          constructor(driver, brand, number) {
+            if (Auto.autoRef) return Auto.autoRef
+              this.driver = driver;
+              this.brand = brand;
+              this.number = number;
+              Auto.autoRef = this            
+          }
+
+          toString(){
+            return `Driver: ${this.driver}; Brand :${this.brand}; Number: ${this.number}.`
+          }
+        }
+
+        obj1 = new Auto('Ivan', 'Ford', '123456')
+        obj2 = new Auto('Petro', 'Opel', '333333')
+        const p1 = document.createElement(`p`);
+        const p2 = document.createElement(`p`);
+        p1.textContent = `Object 1 : ${obj1}`
+        p2.textContent = `Object 2 : ${obj2}`
+        document.body.appendChild(p1);
+        document.body.appendChild(p2);
+      }
+    </script>
+  </body>
+</html>

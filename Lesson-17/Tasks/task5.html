@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  </head>
+
+  <body>
+    <h1>Task 5</h1>
+    <p>Задача 5. Дано два класи MultChecker (клас для перевірки таблиці множення - рандомно генеруються числа, які треба перемножати),</br>
+      AddChecker (клас для перевірки додавання - рандомно генеруються числа у заданому діапазоні, які треба додавати). </br>
+      Обидва класи надсилають результати тестування об'єкту класу Hystory, який зберігає історію тестування у масиві у вигляді об'єктів </br>
+      Приклад.</br>
+      testsList= [</br>
+         {firstNum:1, secondNum:5,opration:’*’, userAnswer:7, correctAnswer:5},</br>
+         {firstNum:3, secondNum:4,opration:’+’, userAnswer:7, correctAnswer:7},</br>
+      ]</br>
+      Можна створити окремий клас TestData, який описує один такий тест і у якому будуть ці поля. </br>
+      Розробити клас TestManager, який використовуючи ці класи за допомогою таймера періодично генерує якісь N задач (рандомно вибираємо, що опитувати: додавання чи множення) і проводить опитування. </br>
+      Результати тестування додаються в об’єкт History. </br>
+       Зробити так, щоб об'єкт такого класу можна було створити тільки один. Коли зроблено ці N задач вивести усю історію на екран. </br></p>
+    <script>
+      let conf = confirm("Do you want to start testing?");
+      if (conf) {
+        class MultChecker{
+          constructor(){
+            this.#firstDigit = this.#generateRandomDigit()
+            this.#secondDigit = this.#generateRandomDigit()
+          }
+          #firstDigit
+          get FirstDigit(){
+            return this.#firstDigit
+          }
+          #secondDigit
+          get SecondDigit(){
+            return this.#secondDigit
+          }
+          getOperator(){
+            return '*'
+          }
+          #generateRandomDigit(){
+            return Math.floor(Math.random()*10) + 1
+          }   
+          toString(){
+            return `${this.#firstDigit} * ${this.#secondDigit} = ?`
+          }    
+        }
+
+        class AddChecker{
+          constructor(minValue, maxValue){
+            this.minValue = parseInt(minValue)
+            this.maxValue = parseInt(maxValue)
+            this.#firstDigit = this.#generateRandomDigit()
+            this.#secondDigit = this.#generateRandomDigit()
+          }
+          #firstDigit
+          get FirstDigit(){
+            return this.#firstDigit
+          }
+          #secondDigit
+          get SecondDigit(){
+            return this.#secondDigit
+          }
+          getOperator(){
+            return '+'
+          }
+          #generateRandomDigit(){
+            return Math.floor(Math.random() * (this.maxValue - this.minValue +1) + this.minValue)
+          }   
+          toString(){
+            return `${this.#firstDigit} + ${this.#secondDigit} = ?`
+          }    
+        }
+        class TestData{
+          constructor(firstNum, secondNum, operation){
+            this.firstNum = firstNum
+            this.secondNum = secondNum
+            this.operation = operation
+            this.#correctAnswer = this.#calculateAnswer()
+            this.#userAnswer = this.setUserAnswer()
+            this.#result = this.#checkResult() 
+          }     
+          #userAnswer
+          setUserAnswer(){        
+            return parseInt(prompt(`${this.firstNum} ${this.operation} ${this.secondNum} = ?`))
+          }
+          #correctAnswer
+          #calculateAnswer(){
+            let correctAnswer
+            if(this.operation === '*'){
+              correctAnswer = this.firstNum * this.secondNum
+            } else{
+              correctAnswer = this.firstNum + this.secondNum
+            }
+            return correctAnswer
+          }
+          #result
+          #checkResult(){
+            let result
+            if(this.#userAnswer === this.#correctAnswer){
+              result = 'PASSED'
+            } else{
+              result = 'FAILED'
+            }
+            return result
+          }
+          toString(){
+            return `${this.firstNum} ${this.operation} ${this.secondNum} = ${this.#userAnswer}, (${this.#correctAnswer})- ${this.#result}`
+          }
+          
+        }
+        class TestManager{
+          static testManagerInst
+          
+          constructor(){
+            if(TestManager.testManagerInstance) return TestManager.testManagerInstance
+            this.testList = []
+            TestManager.testManagerInstance = this
+          }
+          run(num){
+            for(let i = 0; i < num; i++){
+              const rand = Math.floor(Math.random() * 100)
+              const mult = new MultChecker()
+              const add = new AddChecker(2, 50)
+              if(rand % 2 === 0){
+                const testData = new TestData(mult.FirstDigit, mult.SecondDigit, mult.getOperator())
+                this.testList.push(testData)
+              } else{
+                const testData = new TestData(add.FirstDigit, add.SecondDigit, add.getOperator())
+                this.testList.push(testData)
+              }
+              
+            }           
+          }
+          showResults(){
+            for (const test of this.testList) {
+                const resultElement = document.createElement('p');
+                resultElement.textContent = test.toString();
+                document.body.appendChild(resultElement);
+            }
+          }
+        }
+        
+        const testManager = new TestManager()
+        testManager.run(5)
+        testManager.showResults()
+       
+        
+      }
+    </script>
+  </body>
+</html>

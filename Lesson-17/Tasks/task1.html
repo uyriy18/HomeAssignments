@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  </head>
+
+  <body>
+    <div id="table-container"></div>
+    <h1>Task 1</h1>
+    <p>
+      Задача 1.  Створити клас, що дозволяє виконувати такі операції над масивами: знаходження кількості додатних, кількості від’ємних, кількість входжень деякого числа (статичні методи) 
+    </p>
+    <script>
+      let conf = confirm("Do you want to start testing?");
+      if (conf) {
+        class Operator{
+          static getPositiveCount(array){
+            return array.reduce((count, prevValue) => prevValue > 0 ? count = count + 1 : count, 0)
+          }
+          static getNegativeCount(array){
+            return array.reduce((count, prevValue) => prevValue < 0 ? count = count + 1 : count, 0)
+          }
+          static getDigitCount(array, digit){
+            return array.reduce((count, prevValue) => prevValue === digit ? count = count + 1 : count, 0)
+          }      
+        }
+
+        function createParagraph(){
+          return document.createElement('p')
+        }
+        
+        const array = [2, -12, 12, -6, 2, 23, -69]
+
+
+        const p1 = createParagraph();
+        p1.textContent = `Positive count : ${Operator.getPositiveCount(array)}`
+        const p2 = createParagraph();
+        p2.textContent = `Negative count : ${Operator.getNegativeCount(array)}`
+        const p3 = createParagraph();
+        p3.textContent = `There are ${Operator.getDigitCount(array, 2)} digets \'2\' in array`
+        const div = document.createElement('div')
+        div.appendChild(p1);
+        div.appendChild(p2);
+        div.appendChild(p3);
+        document.body.appendChild(div)
+
+        
+      }
+    </script>
+  </body>
+</html>
