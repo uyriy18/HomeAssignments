@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <style>
+      .table-container {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      label {
+        width: 100px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Task 3</h1>
+    <p>
+      Задача 3. Користувач задає рік народження. Визначити кількість років
+      користувача.
+    </p>
+    <h2>When was you born?</h2>
+    <div class="table-container">
+      <div class="row">
+        <label>Day</label>
+        <input id="birthDay" type="" />
+      </div>
+      <div class="row">
+        <label>month</label>
+        <input id="birthMonth" type="" />
+      </div>
+      <div class="row">
+        <label>year</label>
+        <input id="birthYear" />
+      </div>
+      <div class="row">
+        <button id="calculate">Calculate</button>
+        <label id="result"></label>
+      </div>
+      <div class="row">
+        <label id="age"></label>
+      </div>
+    </div>
+
+    <script>
+      const monthsArray = [
+        { month: "January", days: 31 },
+        { month: "February", days: 28 },
+        { month: "March", days: 31 },
+        { month: "April", days: 30 },
+        { month: "May", days: 31 },
+        { month: "June", days: 30 },
+        { month: "July", days: 31 },
+        { month: "August", days: 31 },
+        { month: "September", days: 30 },
+        { month: "October", days: 31 },
+        { month: "November", days: 30 },
+        { month: "December", days: 31 },
+      ];
+      document.getElementById("calculate").onclick = function () {
+        const birthDay = parseInt(document.getElementById(`birthDay`).value);
+        const birthMonth = parseInt(
+          document.getElementById(`birthMonth`).value
+        );
+        const birthYear = parseInt(document.getElementById(`birthYear`).value);
+         const userAge = calculateBirthYear(
+          birthDay,
+          birthMonth,
+          birthYear
+        );
+        document.getElementById(`result`).innerText = `${userAge.years} years, ${userAge.months} month, ${userAge.days} days`
+      };
+
+      function calculateBirthYear(day, month, year) {
+        if (day > monthsArray[month - 1].days || day < 1) {
+          throw new Error(
+            `For the ${
+              monthsArray[month - 1].month
+            } days should be between 1 and ${monthsArray[month - 1].days}`
+          );
+        } else if (month < 1 || month > 12) {
+          throw new Error(`Month shold be between 1 and 12`);
+        } else if (year > new Date().getFullYear()) {
+          throw new Error(`Year cannot be in the future`);
+        } else {
+          const userBirthDate = new Date(year, month - 1, day);
+          if (userBirthDate > Date.now()) {
+            throw new Error(`Date cannot be in the Future`);
+          } else {
+            const differenceInMilliseconds =
+              Date.now() - userBirthDate.getTime();
+            const years = Math.floor(
+              differenceInMilliseconds / (1000 * 60 * 60 * 24 * 365.25)
+            );
+            const remainingMillisecondsAfterYears =
+              differenceInMilliseconds % (1000 * 60 * 60 * 24 * 365.25);
+
+            const months = Math.floor(
+              remainingMillisecondsAfterYears / (1000 * 60 * 60 * 24 * 30.44)
+            );
+            const remainingMillisecondsAfterMonths =
+              remainingMillisecondsAfterYears % (1000 * 60 * 60 * 24 * 30.44);
+
+            const days = Math.floor(
+              remainingMillisecondsAfterMonths / (1000 * 60 * 60 * 24)
+            );
+
+            return { years, months, days };
+          }
+        }
+      }
+    </script>
+  </body>
+</html>

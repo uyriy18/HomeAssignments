@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <style>
+      .convertor {
+        display: flex;
+        flex-direction: column;
+        gap: 10px; 
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Task 2</h1>
+    <p>
+      Задача 2. Зробити конвертер валют (курси валют – константи у скрипті)
+    </p>
+    <div id="content-table">
+      <div class="convertor">
+        <div>
+          <label>Sume in HRN</label>
+          <input type="" id="hrnInput">
+        </div>
+        <div>
+          <button id="convert">Convert</button>
+        </div>    
+        <div>
+          <label>Sume in USD</label>
+          <input type="" id="usdInput">
+        </div>
+        <div>
+          <label>Sume in EUR</label>
+          <input type="" id="eurInput">
+        </div>
+      </div>    
+    </div>
+    <script>
+     document.getElementById(`convert`).onclick = function(){
+      const hrn = parseInt(document.getElementById(`hrnInput`).value)
+      if(!isNaN(hrn)){
+        document.getElementById(`usdInput`).value = (hrn/40.935).toFixed(2)
+        document.getElementById(`eurInput`).value = (hrn/46.336).toFixed(2)
+      } else{
+        alert('Please enter a valid number in HRN input.');
+      }
+      
+     }
+    </script>
+  </body>
+</html>

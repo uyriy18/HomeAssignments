@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Document</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <style>
+    button {
+      height: 100px;
+      width: 100px;
+      border: 1px solid black;
+      font-size: large;
+      border-radius: 5%;
+      background-color: ivory;
+    }
+
+    #calculator {
+      max-width: 300px;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Task 1</h1>
+  <p>Задача 1. Розробити калькулятор</p>
+  <div id="calculator" style="max-width: 300px; margin: 0 auto;"></div>
+  <div>
+    <label id="operationLabel"></label>
+  </div>
+  <div>
+    <input type="0" id="calcScreen" style="height: 50px; width: 305px; box-sizing: border-box; font-size: 24px;">
+  </div>
+  <div id="btnContainer">
+    <div>
+      <button>1</button>
+      <button>2</button>
+      <button>3</button>
+    </div>
+    <div>
+      <button>4</button>
+      <button>5</button>
+      <button>6</button>
+    </div>
+    <div>
+      <button>7</button>
+      <button>8</button>
+      <button>9</button>
+    </div>
+    <div>
+      <button>+</button>
+      <button>0</button>
+      <button>DEL</button>
+    </div>
+    <div>
+      <div>
+        <button>*</button>
+        <button>-</button>
+        <button>/</button>
+      </div>
+      <button>=</button>
+      <button>Clear</button>
+    </div>
+  </div>
+
+  </div>
+
+  <script>
+    let firstDigit;
+    let secondDigit;
+    let operation;
+    let result;
+    let calcScreen = document.getElementById('calcScreen')
+    document.getElementById('btnContainer').onclick = function (event) {
+      const btn = event.target;
+      if (btn.tagName === 'BUTTON') {
+        if (btn.innerText === "DEL") {
+          calcScreen.value = calcScreen.value.slice(0, -1);
+        } else if (btn.innerText === "+") {
+          firstDigit = parseInt(calcScreen.value)
+          operation = '+'
+          calcScreen.value = ''
+        } else if (btn.innerText === "*") {
+          firstDigit = parseInt(calcScreen.value)
+          operation = '*'
+          calcScreen.value = ''
+        } else if (btn.innerText === "-") {
+          firstDigit = parseInt(calcScreen.value)
+          operation = '-'
+          calcScreen.value = ''
+        } else if (btn.innerText === "/") {
+          firstDigit = parseInt(calcScreen.value)
+          operation = '/'
+          calcScreen.value = ''
+        } else if (btn.innerText === "=") {
+          secondDigit = parseInt(calcScreen.value)
+          calculate()
+        } else if (btn.innerText === "Clear") {
+          calcScreen.value = ''
+        }
+        else {
+          calcScreen.value += btn.innerText;
+        }
+      }
+    }
+    function updateLabel() {
+      document.getElementById('operationLabel').innerText = `${firstDigit} ${operation} ${secondDigit} = ${result}`
+    }
+    function calculate() {
+      if (operation === "+") {
+        result = firstDigit + secondDigit
+        calcScreen.value = result
+        updateLabel()
+      } else if (operation === "*") {
+        result = firstDigit * secondDigit
+        calcScreen.value = result
+        updateLabel()
+      } else if (operation === "-") {
+        result = firstDigit - secondDigit
+        calcScreen.value = result
+        updateLabel()
+      } else if (operation === "/") {
+        result = firstDigit / secondDigit
+        calcScreen.value = result
+        updateLabel()
+      }
+    }
+
+  </script>
+</body>
+
+</html>
