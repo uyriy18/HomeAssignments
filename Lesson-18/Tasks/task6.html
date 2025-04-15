@@ -9,12 +9,54 @@
   <body>
     <h1>Task 3</h1>
     <p>
-      Задача 6. Користувач задає кількість оцінок і натискає на кнопку «get table». В результаті формується таблиця з input, куди користувач вводить оцінки. Після цього натискає на кнопку “get sum” і знаходить середнє значення.
+      Задача 6. Користувач задає кількість оцінок і натискає на кнопку «get
+      table». В результаті формується таблиця з input, куди користувач вводить
+      оцінки. Після цього натискає на кнопку “get sum” і знаходить середнє
+      значення.
     </p>
+    <div>
+      <div>
+        <label id="priceLabel"></label>
+        <input type="" id="MarksNum" />
+      </div>
+      <div>
+        <button id="createTableBtn">get table</button>
+      </div>
+      <div id="inputsDiv"></div>
+      <div id="btnDiv"></div>
+      <div id="resDiv"></div>
+    </div>
     <script>
-      let conf = confirm("Do you want to start testing?");
-      if (conf) {
-        
+      const createInputsBtn = document.getElementById("createTableBtn")
+      const resDiv = document.getElementById("inputsDiv");
+      const buttonDiv = document.getElementById("btnDiv");
+      const resultDiv = document.getElementById("resDiv");
+  
+      createInputsBtn.onclick = (event) => {
+        const marksNumber = parseInt(document.getElementById("MarksNum").value);
+        if (isNaN(marksNumber)) {
+          throw new Error(`Only the numbers are alowed`);
+        } else {
+          for (let i = 0; i < marksNumber; i++) {
+            const input = generateInput();
+            resDiv.append(input);
+          }
+          const button = document.createElement("button");
+          button.innerText = "get sum";
+          buttonDiv.append(button);
+          button.onclick = calculateAver
+        }
+      };
+       function calculateAver() {
+        const inputsArr = Array.from(document.getElementById("inputsDiv").getElementsByTagName("input"));
+        let averSum = inputsArr.reduce((prevEl, input) => prevEl + parseInt(input.value), 0)/inputsArr.length
+        const h3 = document.createElement('h3')
+        h3.textContent = (averSum).toFixed(1)
+        resultDiv.append(h3)
+      }
+
+      function generateInput() {
+        return document.createElement("input");
       }
     </script>
   </body>
