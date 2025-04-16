@@ -10,25 +10,31 @@
         height: 25px;
         width: 100px;
       }
+
       .stg {
         justify-content: center;
         display: flex;
         flex-direction: column;
         gap: 10px;
       }
-      div {
+
+      .trip {
         justify-content: center;
         display: flex;
-        flex-direction: column;
-        gap: 2px;
+        flex-direction: row;
+        gap: 30px;
       }
+
       hr {
         border-top: 1px solid dimgray;
         margin: 5px 0;
       }
+
       p {
         display: flex;
-        padding: 0, 5px;
+        padding: 0 5px;
+        font-size: larger;
+        text-align: center;
       }
     </style>
   </head>
@@ -41,40 +47,49 @@
       гідів(використати - radio buttons). Ціни визначте самі. Підрахувати
       загальну вартість.
     </p>
-    <div>
+    <div class="trip">
       <div id="firstStage" class="stg"></div>
       <div id="secondStage" class="stg"></div>
       <div id="thirdStage" class="stg"></div>
     </div>
+    <p id="sum"></p>
     <script>
       const firstStgDiv = document.getElementById(`firstStage`);
       const secondStgDiv = document.getElementById(`secondStage`);
       const thirdStgDiv = document.getElementById(`thirdStage`);
+      const sumP = document.getElementById(`sum`);
       window.onload = (event) => {
-        const firstStgHeader = createHeader();
-        firstStgHeader.textContent = "Select transport type, food type, guide";
-        const firstStgSelect = createSelect();
-        firstStgSelect.id = "firstStgSelect";
+        generateTable(firstStgDiv);
+        generateTable(secondStgDiv);
+        generateTable(thirdStgDiv);
+      };
+
+      function generateTable(div) {
+        const stgHeader = createHeader();
+        stgHeader.textContent = "Select transport type, food type, guide";
+        const stgSelect = createSelect();
+        stgSelect.id = "firstStgSelect";
         const labelForSelect = createLabel();
         labelForSelect.setAttribute("for", "firstStgSelect");
         labelForSelect.textContent = "Select your transport type";
-        const firstCheckBoxDiv = createCheckboxGroup();
-        const firstCalcBtn = createBtn();
-        const firstStgGuide = createRadioBtns();
-        firstStgDiv.append(firstStgHeader);
-        firstStgDiv.append(createSeparator());
-        firstStgDiv.append(labelForSelect);
-        firstStgDiv.append(firstStgSelect);
-        firstStgDiv.append(createSeparator());
-        firstStgDiv.append(firstCheckBoxDiv);
-        firstStgDiv.append(createSeparator());
-        firstStgDiv.append(firstStgGuide);
-        firstStgDiv.append(createSeparator());
-        firstStgDiv.append(firstCalcBtn);
-
-        firstCalcBtn.onclick = () =>
-          calculate(firstStgSelect, firstCheckBoxDiv, firstStgGuide);
-      };
+        const checkBoxDiv = createCheckboxGroup();
+        const calcBtn = createBtn();
+        const stgGuide = createRadioBtns();
+        const stgSumHeader = createHeader();
+        div.append(stgHeader);
+        div.append(createSeparator());
+        div.append(labelForSelect);
+        div.append(stgSelect);
+        div.append(createSeparator());
+        div.append(checkBoxDiv);
+        div.append(createSeparator());
+        div.append(stgGuide);
+        div.append(createSeparator());
+        div.append(calcBtn);
+        div.append(stgSumHeader);
+        calcBtn.onclick = () =>
+          calculate(stgSelect, checkBoxDiv, stgGuide, stgSumHeader);
+      }
 
       function createHeader() {
         return document.createElement("h3");
@@ -133,13 +148,14 @@
           { type: "Izya", value: 50 },
           { type: "Abram", value: 25 },
         ];
+        const radioBtnName = Math.random();
         for (const guide of guidesArray) {
           const radioBtn = document.createElement("input");
           const label = document.createElement("label");
           label.setAttribute("for", guide.type);
           label.textContent = `${guide.type}: ${guide.value}$`;
           radioBtn.type = "radio";
-          radioBtn.name = "guide";
+          radioBtn.name = radioBtnName;
           radioBtn.id = guide.type;
           radioBtn.value = guide.value;
           radioBtnDiv.append(label);
@@ -147,7 +163,7 @@
         }
         return radioBtnDiv;
       }
-      function calculate(select, checkboxes, radiobutton) {
+      function calculate(select, checkboxes, radiobutton, header) {
         const transportPrice = parseInt(select.value);
         const mealTotalPrice = Array.from(
           checkboxes.getElementsByTagName("input")
@@ -159,8 +175,17 @@
             (radio) => radio.checked
           )[0]?.value || 0
         );
-        const sum = transportPrice + mealTotalPrice + guidePrice
-        console.log(sum)
+        const sum = transportPrice + mealTotalPrice + guidePrice;
+        header.textContent = `${sum}$`;
+
+        const stageHeaders = document.querySelectorAll(
+          "#firstStage h3, #secondStage h3, #thirdStage h3"
+        );
+        let totalSum = 0;
+        for (const stgSum of stageHeaders) {
+          totalSum += parseInt(stgSum.textContent) || 0;
+        }
+        sumP.textContent = `Total trip sum: ${totalSum}`;
       }
     </script>
   </body>
