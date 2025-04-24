@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <style>
+      .tank {
+        width: 80px;
+        position: fixed;
+        cursor: pointer;
+      }
+      .tank:hover {
+        cursor: pointer;
+      }
+      .explosion {
+        width: 160px;
+        position: fixed;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Task 1</h1>
+    <p>
+      Байрактар. З верхньої частини екрану у випадковій позиції по горизонталі
+      з’являються танки, які їдуть вниз. При кліку на танк він вибухає і зникає
+      з екрану.
+    </p>
+
+    <script>
+      class Tank {
+        static message = "";
+        static count = 0;
+        static usedLeftPositions = [];
+        constructor(imagesObj, maxStep, maxSpeed, cssObj) {
+          this.imagesObj = imagesObj;
+          this.maxStep = maxStep;
+          this.maxSpeed = maxSpeed;
+          this.cssObj = cssObj;
+        }
+        getRandomValue(minValue, maxValue) {
+          return (
+            minValue + Math.floor(Math.random() * (maxValue - minValue + 1))
+          );
+        }
+        setInitPositionCoordinates() {
+          this.left = this.getUniqueLeftValue();
+          this.top = this.getRandomValue(0, 0);
+        }
+        getUniqueLeftValue() {
+          let left;
+          do {
+            left = this.getRandomValue(10, 90);
+          } while (Tank.usedLeftPositions.includes(left));
+          Tank.usedLeftPositions.push(left);
+          return left;
+        }
+        setInitDirection() {
+          this.vx = this.getRandomValue(-this.maxStep, this.maxStep);
+          this.vy = this.getRandomValue(this.maxStep, this.maxStep);
+        }
+        updateCoordinates() {
+          this.top += this.vy;
+          if (this.top > 100) {
+            gameOverMsg.style.display = "block";
+          }
+        }
+        move() {
+          this.updateCoordinates();
+          this.setTankPosition();
+        }
+        setTankPosition() {
+          this.tank.style.top = this.top + "%";
+          this.tank.style.left = this.left + "%";
+        }
+        setInitTankPosition() {
+          this.setInitPositionCoordinates();
+          this.setTankPosition();
+        }
+        onTap() {
+          clearInterval(this.interval);
+          setTimeout(() => {
+            this.tank.src = this.imagesObj.burned_tank;
+            this.tank.className = `tank`;
+          }, 300);
+          if (this.tank.src.includes("tank.png")) {
+            Tank.count++;
+            header.textContent = `Destroyed Tanks: ${Tank.count}`;
+          }
+          this.tank.src = this.imagesObj.explosion;
+          this.tank.className = `explosion`;
+        }
+        render(containerSelector) {
+          const img = document.createElement("img");
+          img.src = this.imagesObj.tank;
+          img.className = this.cssObj.containerClass;
+          this.tank = img;
+          this.tank.onclick = this.onTap.bind(this);
+          this.setInitTankPosition();
+          if (containerSelector) {
+            document.querySelector(containerSelector).append(img);
+          }
+          this.setInitDirection();
+          this.interval = setInterval(() => this.move(), this.maxSpeed);
+        }
+      }
+      const imagesObj = {
+        tank: "./images/tank.png",
+        burned_tank: "./images/burned.png",
+        explosion: "./images/explosion.png",
+      };
+      const header = document.createElement("h3");
+      header.textContent = `Destroyed Tanks: ${Tank.count}`;
+
+      const gameOverMsg = document.createElement("h2");
+      gameOverMsg.textContent = "Game Over!";
+      gameOverMsg.style.position = "fixed";
+      gameOverMsg.style.top = "50%";
+      gameOverMsg.style.left = "50%";
+      gameOverMsg.style.transform = "translate(-50%, -50%)";
+      gameOverMsg.style.fontSize = "500px";
+      gameOverMsg.style.color = "red";
+      gameOverMsg.style.fontSize = "3rem";
+      gameOverMsg.style.display = "none";
+      gameOverMsg.style.zIndex = "1000";
+      document.body.append(gameOverMsg);
+
+      document.body.append(header);
+      for (let i = 0; i < 10; i++) {
+        setTimeout(() => {
+          const tnk = new Tank(imagesObj, 3, Math.random() * 500 + 10, {
+            containerClass: "tank",
+          });
+          tnk.render("body");
+        }, i * 2000);
+      }
+    </script>
+  </body>
+</html>
