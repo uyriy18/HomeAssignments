@@ -15,7 +15,7 @@
         cursor: pointer;
       }
       .explosion {
-        width: 160px;
+        width: 200px;
         position: fixed;
       }
     </style>
@@ -91,6 +91,11 @@
           if (this.tank.src.includes("tank.png")) {
             Tank.count++;
             header.textContent = `Destroyed Tanks: ${Tank.count}`;
+            if (Tank.count === 10) {
+              gameOverMsg.textContent = "You won!";
+              gameOverMsg.style.color = "green";
+              gameOverMsg.style.display = "block";
+            }
           }
           this.tank.src = this.imagesObj.explosion;
           this.tank.className = `explosion`;
@@ -133,7 +138,7 @@
       document.body.append(header);
       for (let i = 0; i < 10; i++) {
         setTimeout(() => {
-          const tnk = new Tank(imagesObj, 3, Math.random() * 500 + 10, {
+          const tnk = new Tank(imagesObj, 1, Math.random() * 500 + 10, {
             containerClass: "tank",
           });
           tnk.render("body");
