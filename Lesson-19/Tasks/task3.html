@@ -16,7 +16,49 @@
       списки з парною кількістю елементів зафарбувати у зелений колір, інші у
       червоний.
     </p>
+    <div id="container">
+      <div id="first"></div>
+      <div id="second"></div>
+      <div id="third"></div>
+      <div id="fourth"></div>
+      <div id="fith"></div>
+    </div>
+    <button id="paint">Paint</button>
 
-    <script></script>
+    <script>
+      const container = document.getElementById("container");
+      const childElements = Array.from(container.children);
+      fillDivs(childElements);
+
+      function fillDivs(divArray) {
+        for (let i = 0; i < divArray.length; i++) {
+          divArray[i].textContent = JSON.stringify(creTENumList());
+        }
+      }
+
+      function creTENumList() {
+        const newList = fillList();
+        return newList;
+      }
+      function fillList() {
+        let randomLength = Math.floor(Math.random() * 10 + 1);
+        let list = new Array(randomLength);
+        for (let i = 0; i < list.length; i++) {
+          list[i] = Math.floor(Math.random() * 100 + 1);
+        }
+        return list;
+      }
+
+      paint.onclick = (event) => {
+        childElements.forEach((child) => {
+          const arrayFromText = JSON.parse(child.textContent);
+          if (arrayFromText.length % 2 === 0) {
+            child.style.color = "green";
+          } else {
+            child.style.color = "red";
+          }
+        });
+      };
+    </script>
   </body>
 </html>

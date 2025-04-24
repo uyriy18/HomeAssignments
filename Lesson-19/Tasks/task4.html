@@ -5,6 +5,18 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <style>
+      th {
+        height: 50px;
+        width: 50px;
+        margin: 3px;
+        border: 1px solid darkslategrey;
+        border-radius: 5%;
+      }
+      table {
+        margin: 20px;
+      }
+    </style>
   </head>
 
   <body>
@@ -17,6 +29,43 @@
       для цього атрибута).
     </p>
 
-    <script></script>
+    <div id="container"></div>
+
+    <script>
+      window.onload = (event) => {
+        for (let i = 0; i < 3; i++) {
+          const table = generateTable();
+          const label = document.createElement(`label`);
+          label.innerText = 0;
+          table.append(label);
+          document.getElementById("container").append(table);
+        }
+      };
+      function getRandomNumber() {
+        return Math.floor(Math.random() * 10);
+      }
+      function generateTable() {
+        const table = document.createElement("table");
+        for (let i = 0; i < 3; i++) {
+          const tr = document.createElement("tr");
+          for (let j = 0; j < 3; j++) {
+            const th = document.createElement("th");
+            th.innerText = getRandomNumber();
+            tr.append(th);
+          }
+          table.append(tr);
+        }
+        return table;
+      }
+      container.onclick = (event) => {
+        const target = event.target;
+        if (target.tagName === "TABLE" || "TD") {
+          const targetTable = target.closest("table");
+          const label = targetTable.querySelector("label");
+          targetTable.style.border = "2px solid red";
+          label.innerText = parseInt(label.innerText) + 1;
+        }
+      };
+    </script>
   </body>
 </html>

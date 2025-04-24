@@ -8,5 +8,6 @@
   "editor.suggestOnTriggerCharacters": false,
   "editor.inlineSuggest.enabled": false,
   "editor.hover.enabled": false,
-  "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "notebook.defaultFormatter": "esbenp.prettier-vscode"
 }

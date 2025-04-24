@@ -5,6 +5,20 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <style>
+      .product {
+        height: 300px;
+        width: 350px;
+        display: inline-block;
+        margin: 10px;
+        border: 3px solid transparent;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      .product.selected {
+        border: 3px solid darkgreen;
+      }
+    </style>
   </head>
 
   <body>
@@ -14,7 +28,24 @@
       Вибраний товар має зелену рамку (при кліку робити toogle з класом
       вибраного елемента)
     </p>
+    <div id="product-container"></div>
 
-    <script></script>
+    <script>
+      const productImages = ["product1.png", "product2.png", "product3.png"];
+      const container = document.getElementById("product-container");
+
+      productImages.forEach((image) => {
+        const img = document.createElement("img");
+        img.className = "unselected";
+        img.src = `./productTiles/${image}`;
+        img.alt = "Product Image";
+        img.className = "product";
+        container.append(img);
+
+        img.addEventListener("click", () => {
+          img.classList.toggle("selected");
+        });
+      });
+    </script>
   </body>
 </html>
