@@ -84,6 +84,9 @@
           setTimeout(() => {
             this.tank.src = this.imagesObj.burned_tank;
             this.tank.className = `tank`;
+            setTimeout(() => {
+              this.tank.remove();
+            }, 1000);
           }, 300);
           if (this.tank.src.includes("tank.png")) {
             Tank.count++;
