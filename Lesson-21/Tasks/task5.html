@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        background-color: #f9f9f9;
+      }
+
+      h1 {
+        text-align: center;
+        color: #333;
+      }
+
+      #container {
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      div {
+        margin-bottom: 15px;
+      }
+
+      input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+
+      label {
+        font-weight: bold;
+        color: #555;
+      }
+
+      button {
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+
+      #resultMessage {
+        text-align: center;
+        font-size: 18px;
+        color: #333;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Task 5</h1>
+    <p>
+      Задача 5. . Користувач задає місяць навчання учня (перевіряти чи є числом,
+      чи від 1 до 12, чи не канікули) та оцінку (перевіряти чи є числом, чи від
+      1 до 100). <br />
+      Вивести чи зможе він виправити оцінку (якщо оцінка погана і це не останній
+      місяць у семестрі). <br />
+      Обробку усіх помилок зробити з використанням відповідних класів.
+    </p>
+    <div id="container">
+      <div>
+        <input type="text" id="monthNumber" />
+        <label for="monthNumber">Enter the Month number</label>
+      </div>
+      <div>
+        <input type="text" id="mark" />
+        <label for="mark">Enter the Mark</label>
+      </div>
+      <div>
+        <button id="result">Result</button>
+      </div>
+      <div>
+        <h3 id="resultMessage"></h3>
+      </div>
+    </div>
+
+    <script>
+      class ValidationError extends Error {
+        constructor(message) {
+          super(message);
+          this.name = "ValidationError";
+        }
+      }
+      class SemesterError extends Error {
+        constructor(message) {
+          super(message);
+          this.name = "SemesterError";
+        }
+      }
+      document.getElementById("result").onclick = (event) => {
+        try {
+          const monthNumber = parseInt(
+            document.getElementById("monthNumber").value
+          );
+          const mark = parseInt(document.getElementById("mark").value);
+          montValidator(monthNumber);
+          document.getElementById("resultMessage").textContent = assestTheMark(
+            monthNumber,
+            mark
+          );
+        } catch (error) {
+          document.getElementById("resultMessage").textContent = error.message;
+        }
+      };
+
+      function montValidator(month) {
+        if (isNaN(month)) {
+          throw new ValidationError("Month must be a number.");
+        }
+        if (month < 1 || month > 12) {
+          throw new ValidationError("Month must be between 1 and 12.");
+        }
+        if ([6, 7, 8].includes(month)) {
+          throw new SemesterError("This month is during summer hollidays.");
+        }
+      }
+      function markValidator(mark) {
+        if (isNaN(mark)) {
+          throw new ValidationError("Mark must be a number.");
+        } else if (mark < 1 || mark > 100) {
+          throw new ValidationError("Mark must be between 1 and 100.");
+        } else {
+        }
+      }
+      function assestTheMark(month, mark) {
+        let message;
+        if (month === 5 || month === 12) {
+          message =
+            "The grade cannot be improved because it's the last month of the semester.";
+        } else if (mark > 80) {
+          message = "The grade is good and does not need improvement.";
+        } else {
+          message = "The grade can be improved.";
+        }
+        return message;
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  </head>
+
+  <body>
+    <h1>Task 4</h1>
+    <p>Задача 4. Розробити Класи</p>
+
+    <div id="container"></div>
+
+    <script>
+      class Image {
+        constructor(xCoordinate, yCoordinate, imgSrc, interval) {
+          this.xCoordinate = xCoordinate;
+          this.yCoordinate = yCoordinate;
+          this.imgSrc = imgSrc;
+          this.interval = interval;
+          this.img;
+        }
+        renderElement() {
+          this.img = document.createElement("img");
+          this.img.src = this.imgSrc;
+          this.img.style.height = "150px";
+          this.img.style.width = "150px";
+          this.img.style.position = "absolute";
+          this.img.style.left = `${this.xCoordinate}px`;
+          this.img.style.top = `${this.yCoordinate}px`;
+          this.img.src = this.imgSrc;
+          document.getElementById("container").appendChild(this.img);
+        }
+        getRandomValue() {
+          return Math.floor(Math.random() * 11) - 5;
+        }
+
+        move(element) {
+          this.img.style.height = "50px";
+          this.img.style.width = "50px";
+          setInterval(() => {
+            this.updateCoordinates(element);
+          }, this.interval);
+        }
+        updateCoordinates(element) {
+          if (element instanceof Bird) {
+            this.xCoordinate += this.getRandomValue() * 2;
+            this.yCoordinate += this.getRandomValue() * 2;
+            this.img.style.left = `${this.xCoordinate}px`;
+            this.img.style.top = `${this.yCoordinate}px`;
+          } else {
+            this.xCoordinate += this.getRandomValue() * 2;
+            this.img.style.left = `${this.xCoordinate}px`;
+          }
+        }
+      }
+      class House extends Image {
+        constructor(xCoordinate, yCoordinate, imgSrc, interval) {
+          super(xCoordinate, yCoordinate, imgSrc, interval);
+        }
+        scale() {
+          setInterval(() => {
+            const scaledSize = this.getRandomValue();
+            this.img.style.height = `${
+              parseInt(this.img.style.height) + scaledSize
+            }px`;
+            this.img.style.width = `${
+              parseInt(this.img.style.height) + scaledSize
+            }px`;
+          }, this.interval);
+        }
+      }
+      class Bird extends Image {
+        constructor(xCoordinate, yCoordinate, imgSrc, interval) {
+          super(xCoordinate, yCoordinate, imgSrc, interval);
+        }
+      }
+      class Dog extends Image {
+        constructor(xCoordinate, yCoordinate, imgSrc, interval) {
+          super(xCoordinate, yCoordinate, imgSrc, interval);
+        }
+      }
+      const imgArr = [
+        "./images/angry-birds.png",
+        "./images/house.png",
+        "./images/dog.png",
+      ];
+      const house = new House(110, 300, imgArr[1], 500);
+      house.renderElement();
+      house.scale();
+
+      const bird = new Bird(510, 50, imgArr[0], 100);
+      bird.renderElement();
+      bird.move(bird);
+
+      const dog = new Dog(710, 320, imgArr[2], 100);
+      dog.renderElement();
+      dog.move(dog);
+    </script>
+  </body>
+</html>

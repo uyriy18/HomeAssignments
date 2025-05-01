@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <style>
+      .hello {
+        cursor: pointer;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Task 1</h1>
+    <p>
+      Задача 1. Розробити клас Person (поля:ім'я, вік, адреса; методи: toString,
+      визначення року народження).<br />
+      На основі класу Person розробити клас Worker (додати поля: посада, розмір
+      заробітної плати, кількість відсотів оподаткування; методи:визначення
+      кількості виплачених коштів за рік, та визначення розміру податків)
+    </p>
+
+    <script>
+      class Person {
+        constructor(name, age, address) {
+          this.name = name;
+          this.age = age;
+          this.address = address;
+        }
+        getBirthYear() {
+          return new Date().getFullYear() - this.age;
+        }
+        toString() {
+          return `Name: ${this.name}, age : ${this.age}, address: ${this.address}`;
+        }
+      }
+      class Worker extends Person {
+        constructor(name, age, address, position, salaryPerMonth, taxRate) {
+          super(name, age, address);
+          this.position = position;
+          this.salaryPerMonth = salaryPerMonth;
+          this.taxRate = taxRate;
+        }
+        getSalaryPerYear() {
+          return this.salaryPerMonth * 12;
+        }
+        getTaxesPerYear() {
+          return (this.getSalaryPerYear() * this.taxRate) / 100;
+        }
+      }
+
+      const p1 = new Person("Mike", 1988, "Chicago");
+      const personTile = document.createElement("p");
+      personTile.textContent = `Person - ${p1}, Birth Year: ${p1.getBirthYear()}`;
+      document.body.append(personTile);
+
+      const w1 = new Worker("Jhon", 1976, "New York", "Manager", 5500, 25);
+      const workerTile = document.createElement("p");
+      workerTile.textContent = `Worker - ${w1}, Birth Year: ${w1.getBirthYear()}, Salary per year: ${w1.getSalaryPerYear()}, Taxes per year: ${w1.getTaxesPerYear()}`;
+      document.body.append(workerTile);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  </head>
+
+  <body>
+    <h1>Task 3</h1>
+    <p>
+      Задача 3. творити клас Bank, у якому зберігається масив клієнтів. Виконати
+      такі операції:
+    </p>
+    <ul>
+      <li>Вивести всіх простих клієнтів;</li>
+      <li>Вивести всіх клієнтів GoldenClient;</li>
+      <li>Знайти сумарну кількість грошей на рахунку;</li>
+    </ul>
+
+    <script>
+      class Bank {
+        constructor() {
+          this.clientsList = [];
+          this.goldenClientsList = [];
+        }
+
+        addClient(client) {
+          if (client instanceof GoldenClient) {
+            this.goldenClientsList.push(client);
+          } else if (client instanceof Client) {
+            this.clientsList.push(client);
+          } else {
+            throw new Error(`Unexpected error occured`);
+          }
+        }
+        renderAllClients(clients) {
+          const clientsContainer = document.createElement("div");
+          const clientsHeader = document.createElement("h2");
+          clientsHeader.textContent = clients[0].constructor.name;
+          clientsContainer.append(clientsHeader);
+          for (const client of clients) {
+            const clientP = document.createElement("p");
+            clientP.textContent = client;
+            clientsContainer.append(clientP);
+          }
+          return clientsContainer;
+        }
+        getClientsMoneyAmount(clients) {
+          return clients.reduce(
+            (sum, prevClient) => (sum += prevClient.Balance),
+            0
+          );
+        }
+      }
+
+      //-------------------------------------------------------------------
+      class Client {
+        static idArray = [];
+        #balance;
+        constructor(fullName, balance) {
+          this.fullName = {
+            name: fullName.name,
+            surname: fullName.surname,
+            fatherName: fullName.fatherName,
+          };
+          this.#balance = balance;
+        }
+        #id;
+        get Id() {
+          return this.#id;
+        }
+        set Id(initId) {
+          if (!Client.idArray.includes(initId)) {
+            Client.idArray.push(initId);
+            this.#id = initId;
+          } else {
+            throw new Error(`Client with this ID has already existed`);
+          }
+        }
+
+        get Balance() {
+          return this.#balance;
+        }
+        increaseBalance(sum) {
+          this.#balance += sum;
+        }
+        decreaseBallance(sum) {
+          if (this.#balance - sum >= 0) {
+            this.#balance -= sum;
+          } else {
+            throw new Error(`Not enough money on your balance`);
+          }
+        }
+        toString() {
+          return `User ID: ${this.Id}, ${this.fullName.name} ${this.fullName.surname} ${this.fullName.fatherName}, Balance: ${this.Balance}`;
+        }
+      }
+      class GoldenClient extends Client {
+        constructor(fullName, balance, bankTax) {
+          super(fullName, balance);
+          this.bankTax = bankTax;
+          this.#limit = 0;
+        }
+        #limit;
+        get Limit() {
+          return this.#limit;
+        }
+        set Limit(limitInit) {
+          if (limitInit < 0) {
+            throw new Error(`Limit cannot be less than 0`);
+          } else {
+            this.#limit = limitInit;
+          }
+        }
+        decreaseBallance(sum) {
+          let bankTarif = 0;
+
+          if (this.Balance - sum >= 0) {
+            this.increaseBalance(-sum);
+            return {
+              balance: this.Balance,
+              limit: this.Limit,
+              bankTarif: bankTarif,
+            };
+          } else if (this.Balance + this.Limit >= sum) {
+            const remainingAmount = sum - this.Balance;
+            bankTarif = this.getBankTax(remainingAmount);
+            this.increaseBalance(-this.Balance);
+            this.#limit -= remainingAmount - bankTarif;
+            return {
+              balance: this.Balance,
+              limit: this.Limit,
+              bankTarif: bankTarif,
+            };
+          } else {
+            throw new Error(`Not enough money on your balance`);
+          }
+        }
+        getBankTax(dif) {
+          return (this.bankTax * dif * -1) / 100;
+        }
+        toString() {
+          return `User ID: ${this.Id}, ${this.fullName.name} ${this.fullName.surname} ${this.fullName.fatherName}, Balance: ${this.Balance}
+          limit: ${this.Limit}, Bank tax rate: ${this.bankTax}`;
+        }
+      }
+
+      //----------------------------------------------------------
+      const client1 = new Client(
+        { name: "Alice", surname: "Smith", fatherName: "Robert" },
+        1500
+      );
+      client1.Id = 1001;
+
+      const client2 = new Client(
+        { name: "Bob", surname: "Johnson", fatherName: "Michael" },
+        2000
+      );
+      client2.Id = 1002;
+
+      const client3 = new Client(
+        { name: "Charlie", surname: "Brown", fatherName: "David" },
+        2500
+      );
+      client3.Id = 1003;
+
+      const client4 = new Client(
+        { name: "Diana", surname: "Williams", fatherName: "Edward" },
+        3000
+      );
+      client4.Id = 1004;
+
+      const client5 = new Client(
+        { name: "Eve", surname: "Taylor", fatherName: "James" },
+        3500
+      );
+      client5.Id = 1005;
+
+      // Example: Add them to the Bank class
+      const bank = new Bank();
+      bank.addClient(client1);
+      bank.addClient(client2);
+      bank.addClient(client3);
+      bank.addClient(client4);
+      bank.addClient(client5);
+
+      document.body.append(bank.renderAllClients(bank.clientsList));
+
+      const gClient1 = new GoldenClient(
+        { name: "Frank", surname: "Miller", fatherName: "George" },
+        4000,
+        5
+      );
+      gClient1.Id = 2001;
+      gClient1.Limit = 1000;
+
+      const gClient2 = new GoldenClient(
+        { name: "Grace", surname: "Wilson", fatherName: "Henry" },
+        4500,
+        7
+      );
+      gClient2.Id = 2002;
+      gClient2.Limit = 1500;
+
+      const gClient3 = new GoldenClient(
+        { name: "Hank", surname: "Anderson", fatherName: "Paul" },
+        5000,
+        10
+      );
+      gClient3.Id = 2003;
+      gClient3.Limit = 2000;
+
+      const gClient4 = new GoldenClient(
+        { name: "Ivy", surname: "Thomas", fatherName: "Richard" },
+        5500,
+        8
+      );
+      gClient4.Id = 2004;
+      gClient4.Limit = 2500;
+
+      const gClient5 = new GoldenClient(
+        { name: "Jack", surname: "Taylor", fatherName: "Edward" },
+        6000,
+        6
+      );
+      gClient5.Id = 2005;
+      gClient5.Limit = 3000;
+
+      // Add them to the Bank class
+      bank.addClient(gClient1);
+      bank.addClient(gClient2);
+      bank.addClient(gClient3);
+      bank.addClient(gClient4);
+      bank.addClient(gClient5);
+
+      // Render Golden Clients
+      document.body.append(bank.renderAllClients(bank.goldenClientsList));
+      const sumClientsP = document.createElement("p");
+      sumClientsP.textContent = `Total sum of money for the Clients ${bank.getClientsMoneyAmount(
+        bank.clientsList
+      )}`;
+      document.body.append(sumClientsP);
+      const sumGoldenClientsP = document.createElement("p");
+      sumGoldenClientsP.textContent = `Total sum of money for the Golden Clients ${bank.getClientsMoneyAmount(
+        bank.goldenClientsList
+      )}`;
+      document.body.append(sumGoldenClientsP);
+    </script>
+  </body>
+</html>
