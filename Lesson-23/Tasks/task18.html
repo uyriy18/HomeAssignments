@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100%; /* Ensure the <html> and <body> elements take up the full height of the viewport */
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+      }
+
+      #container {
+        width: 100%;
+        height: 100%; /* Now this will cover the entire browser window */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: #ffffff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        color: #333;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      p {
+        text-align: center;
+        color: #555;
+        margin-bottom: 30px;
+      }
+
+      label {
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 10px;
+        display: block;
+      }
+
+      input[type="text"] {
+        width: 300px;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+
+      button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+
+      #counter {
+        font-size: 18px;
+        color: #007bff;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Task 18</h1>
+    <p>
+      Задача 18. Користувач може змінювати колір фону, що вибирає користувач з
+      використанням <br />
+      input type="color". <br />
+      Зберігати цей колір і відновлювати при наступному відкритті. Також
+      зберігати і відображати кількість змін протягом одного сеансу.
+    </p>
+    <div id="container">
+      <div>
+        <label>Enter the Background color</label>
+      </div>
+      <div>
+        <input type="text" />
+        <button>Apply</button>
+      </div>
+      <div>
+        <label>Background was changed during the session</label>
+        <label id="counter">0</label>
+      </div>
+    </div>
+    <script>
+      window.onload = (event) => {
+        let backgroundColor = localStorage.getItem("backgroundColor");
+        if (backgroundColor) {
+          document.getElementById("container").style.backgroundColor =
+            backgroundColor;
+        }
+      };
+      document.getElementsByTagName("BUTTON")[0].onclick = (event) => {
+        let backgroundColor = localStorage.getItem("backgroundColor");
+        let counter = parseInt(sessionStorage.getItem("counter"));
+
+        if (backgroundColor) {
+          backgroundColor = document.getElementsByTagName("INPUT")[0].value;
+          counter++;
+          document.getElementById("container").style.backgroundColor =
+            backgroundColor;
+          document.getElementById("counter").textContent = counter;
+          localStorage.setItem("backgroundColor", backgroundColor);
+          sessionStorage.setItem("counter", counter);
+        } else {
+          backgroundColor = document.getElementsByTagName("INPUT")[0].value;
+          counter = 1;
+          document.getElementById("container").style.backgroundColor =
+            backgroundColor;
+          document.getElementById("counter").textContent = counter;
+          localStorage.setItem("backgroundColor", backgroundColor);
+          sessionStorage.setItem("counter", counter);
+        }
+      };
+    </script>
+  </body>
+</html>
