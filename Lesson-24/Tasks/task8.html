@@ -21,6 +21,17 @@
       показів.
     </p>
 
-    <script></script>
+    <script>
+      let temperatures = [12.4, 24.9, 10.6, 12.4, 24.9, 12.4, 10.6, 11.9];
+
+      const mapRes = new Map();
+      for (const temp of temperatures) {
+        if (mapRes.has(temp)) mapRes.set(temp, mapRes.get(temp) + 1);
+        else mapRes.set(temp, 1);
+      }
+      let s1 = new Set(temperatures.map((el) => (el = Math.ceil(el))));
+      console.log(mapRes);
+      console.log(s1.size);
+    </script>
   </body>
 </html>

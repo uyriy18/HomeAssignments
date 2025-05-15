@@ -21,6 +21,43 @@
       студентів відвідують хоча б один гурток.
     </p>
 
-    <script></script>
+    <script>
+      const history = [
+        "Smith",
+        "Johnson",
+        "Brown",
+        "Taylor",
+        "Anderson",
+        "Thomas",
+        "Jackson",
+        "White",
+        "Harris",
+        "Martin",
+      ];
+      const math = [
+        "Smith",
+        "Johnson",
+        "Lewis",
+        "Taylor",
+        "Walker",
+        "Harris",
+        "Hall",
+        "Allen",
+        "Martin",
+      ];
+      const setUnique = new Set([...math, ...history]);
+      const setMath = new Set(math);
+      const setHistory = new Set(history);
+
+      // for (const student of history) {
+      //   s1.add(student);
+      // }
+      console.log(`unique students - ${setUnique.size}`);
+      console.log(
+        `${
+          setHistory.intersection(setMath).size
+        } students from History also attend Math`
+      );
+    </script>
   </body>
 </html>
