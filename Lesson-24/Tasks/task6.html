@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <style>
+      .hello {
+        cursor: pointer;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Task 6</h1>
+    <p>
+      Задача 6. Дано інформацію про відвідувачів деякого сайту (для кожного
+      відвідувача зберігається логін). Підрахувати для кожного клієнта кількість
+      відвідувань.
+    </p>
+
+    <script>
+      const visitors = [
+        { login: "user1", visitDate: new Date("2025-10-01") },
+        { login: "user2", visitDate: new Date("2025-10-02") },
+        { login: "user3", visitDate: new Date("2025-10-03") },
+        { login: "user1", visitDate: new Date("2025-10-04") },
+        { login: "user4", visitDate: new Date("2025-10-05") },
+        { login: "user2", visitDate: new Date("2025-10-06") },
+        { login: "user5", visitDate: new Date("2025-10-07") },
+        { login: "user3", visitDate: new Date("2025-10-08") },
+        { login: "user1", visitDate: new Date("2025-10-09") },
+        { login: "user4", visitDate: new Date("2025-10-10") },
+      ];
+      const mapRes = new Map();
+      for (const visitor of visitors) {
+        if (mapRes.has(visitor.login))
+          mapRes.set(visitor.login, mapRes.get(visitor.login) + 1);
+        else mapRes.set(visitor.login, 1);
+      }
+      console.log(mapRes);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <style>
+      .hello {
+        cursor: pointer;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Task 5</h1>
+    <p>
+      Задача 5. Дано масив книг (назва, рік видання, автор, ціна). Підрахувати
+      загальну вартість книг для кожного із авторів.
+    </p>
+
+    <script>
+      const bookList = [
+        { name: "Book1", year: 1998, author: "Author1", price: 120.0 },
+        { name: "Book2", year: 2000, author: "Author2", price: 150.0 },
+        { name: "Book3", year: 2005, author: "Author1", price: 180.0 },
+        { name: "Book4", year: 2010, author: "Author3", price: 200.0 },
+        { name: "Book5", year: 2015, author: "Author2", price: 220.0 },
+        { name: "Book6", year: 2020, author: "Author3", price: 250.0 },
+        { name: "Book7", year: 1995, author: "Author1", price: 100.0 },
+        { name: "Book8", year: 1999, author: "Author2", price: 130.0 },
+        { name: "Book9", year: 2003, author: "Author3", price: 170.0 },
+        { name: "Book10", year: 2008, author: "Author1", price: 190.0 },
+      ];
+      const mapRes = new Map();
+      for (const book of bookList) {
+        if (mapRes.has(book.author)) {
+          mapRes.set(book.author, mapRes.get(book.author) + book.price);
+        } else {
+          mapRes.set(book.author, book.price);
+        }
+      }
+      console.log(mapRes);
+    </script>
+  </body>
+</html>

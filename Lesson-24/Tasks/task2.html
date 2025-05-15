@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <style>
+      .hello {
+        cursor: pointer;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Task 2</h1>
+    <p>
+      Задача 2. Дано Shop -- клас, що містить список товарів (масив об’єктів
+      класу Product (назва, ціна, кількість одиниць). Додати можливість
+      ітератора до класу Shop, щоб при ітеруванні для кожного елемента виводився
+      рядок «товар-загальна вартість»
+    </p>
+
+    <script>
+      class Shop {
+        constructor(productsArray) {
+          this.productsArray = productsArray;
+        }
+
+        // [Symbol.iterator]() {
+        //   return (function* () {
+        //     for (const product of this.productsArray) {
+        //       yield product;
+        //     }
+        //   })();
+        // }
+        [Symbol.iterator]() {
+          this.curruntProductIndex = 0;
+          return this;
+        }
+        next() {
+          if (this.curruntProductIndex < this.productsArray)
+            return { done: false, value: this.curruntProductIndex++ };
+          else return { done: true };
+        }
+      }
+      class Product {
+        constructor(name, price, qty) {
+          this.name = name;
+          this.price = price;
+          this.qty = qty;
+        }
+        totalPrice() {
+          return this.price * this.qty;
+        }
+        [Symbol.toPrimitive]() {
+          return `${this.name} - ${this.price * this.qty}`;
+        }
+      }
+
+      const product1 = new Product("Apple", 2, 10);
+      const product2 = new Product("Banana", 1, 15);
+      const product3 = new Product("Orange", 3, 5);
+      const product4 = new Product("Grapes", 4, 8);
+      const product5 = new Product("Mango", 5, 6);
+      const products = [product1, product2, product3, product4, product5];
+
+      const shop = new Shop(products);
+      for (const product of products) {
+        document.write(`${product} <br>`);
+      }
+    </script>
+  </body>
+</html>

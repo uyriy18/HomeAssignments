@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <style>
+      .hello {
+        cursor: pointer;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Task 1</h1>
+    <p>
+      Дано клас PhoneNumber. Створити функцію перетворення до string, при якому
+      на основі номера виводиться оператор (050…. à MTC, 096… à Kyivstar, ….)
+    </p>
+
+    <script>
+      class PhoneNumber {
+        constructor() {
+          this.phoneReg =
+            /(\+?380)(39|50|63|66|67|68|70|73|90|91|92|93|94|95|96|97|98|99)\d{7}/g;
+          this.prefixPhoneNum =
+            /(\+?380)(39|50|63|66|67|68|70|73|90|91|92|93|94|95|96|97|98|99)/;
+        }
+
+        #phoneNumber;
+        get PhoneNumber() {
+          return this.#phoneNumber;
+        }
+        set PhoneNumber(number) {
+          if (typeof number === "number") {
+            number = number.toString();
+          }
+
+          if (number.match(this.phoneReg)) {
+            this.#phoneNumber = number;
+          } else {
+            throw new Error(`Invalid phone number`);
+          }
+        }
+        replaceOperator(number) {
+          const operatorNum = number.match(this.prefixPhoneNum)[0];
+          if (operatorNum.includes("093")) {
+            return number.replace(this.prefixPhoneNum, "(LifeCell)");
+          } else if (operatorNum.includes("050")) {
+            return number.replace(this.prefixPhoneNum, "(Vodafone)");
+          } else if (operatorNum.includes("096")) {
+            return number.replace(this.prefixPhoneNum, "(Kyivstar)");
+          } else {
+            return number;
+          }
+        }
+        [Symbol.toPrimitive](hint) {
+          let result;
+          switch (hint) {
+            case "string":
+              result = ` | Modified phone number: ${this.replaceOperator(
+                this.PhoneNumber
+              )} | `;
+              break;
+            case "number":
+              result = ` | Modified phone number: ${this.replaceOperator(
+                this.PhoneNumber.toString()
+              )} | `;
+
+              break;
+
+            default:
+              break;
+          }
+          return result;
+        }
+      }
+      const number1 = new PhoneNumber();
+      number1.PhoneNumber = 380936745474;
+      const number2 = new PhoneNumber();
+      number2.PhoneNumber = "+380506555874";
+      const number3 = new PhoneNumber();
+      number3.PhoneNumber = "+380966555874";
+      document.write(number1, number2, number3);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <style>
+      .hello {
+        cursor: pointer;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Task 3</h1>
+    <p>
+      Задача 3. Створити генератор, який би випадковим чином поступово генерував
+      вказану кількість парних чисел.
+    </p>
+
+    <script>
+      function* rnd(count) {
+        for (let index = 0; index < count; index++) {
+          let digit;
+          do {
+            digit = Math.floor(Math.random() * 100);
+          } while (digit % 2 !== 0);
+          yield digit;
+        }
+      }
+
+      for (const num of rnd(5)) {
+        document.write(`${num}<br>`);
+      }
+    </script>
+  </body>
+</html>

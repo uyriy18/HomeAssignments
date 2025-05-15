@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <style>
+      .hello {
+        cursor: pointer;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Task 7</h1>
+    <p>
+      Задача 7. Дано масив студентів (піб, курс, факультет). Підрахувати
+      кількість різних факультетів, та кількість студентів кожного з курсів.
+    </p>
+
+    <script>
+      const students = [
+        { pib: "Ivanov Ivan", course: 1, faculty: "Engineering" },
+        { pib: "Petrov Petro", course: 2, faculty: "Mathematics" },
+        { pib: "Sidorov Sidor", course: 3, faculty: "Physics" },
+        { pib: "Kovalenko Anna", course: 1, faculty: "Engineering" },
+        { pib: "Shevchenko Taras", course: 2, faculty: "Mathematics" },
+        { pib: "Tkachenko Olga", course: 3, faculty: "Biology" },
+        { pib: "Bondarenko Andriy", course: 1, faculty: "Physics" },
+        { pib: "Melnyk Maria", course: 2, faculty: "Engineering" },
+        { pib: "Hrytsenko Oksana", course: 3, faculty: "Mathematics" },
+        { pib: "Lysenko Mykola", course: 1, faculty: "Biology" },
+      ];
+      const mapFacultiesCount = new Map();
+      const mapStudentsCount = new Map();
+
+      for (const student of students) {
+        if (mapFacultiesCount.has(student.faculty)) continue;
+        else mapFacultiesCount.set(student.faculty, 1);
+      }
+      for (const student of students) {
+        if (mapStudentsCount.has(student.course))
+          mapStudentsCount.set(
+            student.course,
+            mapStudentsCount.get(student.course) + 1
+          );
+        else mapStudentsCount.set(student.course, 1);
+      }
+      console.log(mapFacultiesCount);
+      console.log(mapStudentsCount);
+    </script>
+  </body>
+</html>
